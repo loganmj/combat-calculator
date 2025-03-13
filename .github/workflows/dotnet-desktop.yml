@@ -22,7 +22,7 @@ jobs:
         dotnet-version: '8.x'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./CombatCalculator/CombatCalculator.sln
 
     - name: Build
       run: dotnet build ./CombatCalculator/CombatCalculator.sln --configuration Release --no-restore
