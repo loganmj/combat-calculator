@@ -30,17 +30,6 @@ $$p(text{4, 5, or 6}) = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = \frac{3}{6} = 
 
 Or 50%. This makes sense, as half of the results on the dice are considered a successful roll.
 
-## Probability of Success for Common Cases
-In Warhammer 40k, success cases are commonly set as 2+, 3+, 4+, 5+, or 6+ (Rolling a 1 is almost always considered a failure). Each of these success cases on a single die have the following probabilities:
-
-| Roll | $p$ |
-|----------|----------|
-| 2+ | 83.33% |
-| 3+ | 66.66% |
-| 4+ | 50% |
-| 5+ | 33.33% |
-| 6+ | 16.66% |
-
 ## Probability of Failure in a Single Trial
 Probability of failure is defined as the probability that success will *not* occur, and is denoted by $q$.
 
@@ -58,10 +47,22 @@ $$q = 1-p = \left(1- \left(\frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6}
 
 or 33.33%
 
-## Probability of Success in Multiple Trials
-The probability of success in multiple trials is expressed as the equation:
+## Probability of Success for Common Cases
+In Warhammer 40k, success cases are commonly set as 2+, 3+, 4+, 5+, or 6+ (Rolling a 1 is almost always considered a failure). Each of these success cases on a single die have the following probabilities:
 
-$$p^k$$
+| Roll | $p$ |
+|----------|----------|
+| 2+ | 83.33% |
+| 3+ | 66.66% |
+| 4+ | 50% |
+| 5+ | 33.33% |
+| 6+ | 16.66% |
+
+## Probability of Success in Multiple Trials
+In Warhammer, combat is rarely determined by the roll of a single die. Trials must often be repeated and passed multiple times to be considered a success. In stastics this can be expressed by multiplying together the 
+probabilities of each roll.
+
+$$p_0 * p_1 * ... p_n$$
 
 where
 - $p$ is the probability of success for a single trial.
