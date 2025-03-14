@@ -30,7 +30,8 @@ The binomial coefficient represents the number of different ways to choose $k$ e
 We need to select any two objects from this group of five. How many ways are there to pick two objects from the group? Since the order of picking doesn't matter, there are a fixed number of *combinations* of objects that can be
 selected from the group, as shown below:
  
-| Object 1 | Object 2 |
+| Selection 1 | Selection 2 |
+|----------|----------|
 | Object 1 | Object 3 |
 | Object 1 | Object 4 |
 | Object 1 | Object 5 |
