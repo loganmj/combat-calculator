@@ -99,7 +99,7 @@ $$p(\text{success}) = \left(\frac{1}{6} + \frac{1}{6}\right)^5 = \left(\frac{2}{
 
 where $p = \frac{1}{3}$ and the chance of succeeding all five die rolls is 0.41%.
 
-Then the probability of *not* rolling a 5+ on *any* of the five dice is calculated as:
+Then the $p$ value of success for a single trial can be used to calculate the probability of *not* rolling a 5+ on *any* of the five dice:
 
 $$p(\text{failure}) = \left(1-\frac{1}{3}\right)^5 = \left(\frac{2}{3}\right)^5 = \frac{32}{243}$$
 
