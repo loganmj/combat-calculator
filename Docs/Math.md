@@ -16,16 +16,16 @@ where:
 
 - $P(X = k)$ is the probability of getting exactly $k$ successes.
 - $\binom{n}{k}$ is the binomial coefficient.
-- $p^k$ is the probability of success raised to the power of $k$.
-- $(1-p)^{n-k}$ is the probability of failure raised to the power of $n-k$.
+- $p^k$ is the probability of success for $k$ trials.
+- $(1-p)^{n-k}$ is the probability of failure for $n-k$ trials.
 
 Each of these pieces are explained further below.
 
-# Probability Notation
+## Probability Notation
 In statistics, probability is frequently expressed as a function of $P$. In the case of binomial distributions, $P(X=k)$ is used to denote the *probability* that of seeing $k$ successes when all of the trials are run. This 
 means *any* $k$ trials result in a success. It does not matter which specific trials resulted in a success, only that there were exactly $k$ successes in the trial.
 
-# The Binomial Coefficient
+## The Binomial Coefficient
 The binomial coefficient is used to represent the possible number of *combinations* of $k$ elements from a set of $n$ elements without regard to the order of selection. This coefficient is expressed in shorthand as $\binom{n}{k}$, and is 
 calculated using the equation:
 
@@ -54,4 +54,31 @@ matter, a fixed number of *combinations* of objects can be selected from the gro
 There are 10 possible combinations of two objects that can be made from a group of five. This number of combinations can be determined by using the binomial coefficient equation.
 
 $$\frac{n!}{k!(n-k)!} = \frac{5!}{2!(5-2)!} = 10$$
+
+## Probability of Success
+The probability of success for a single trial is expressed as the equation:
+
+$$p^k$$
+
+where
+- $p$ is the probability of success for a single trial.
+- $k$ is the number of trials.
+
+In the context of dice, there are six possible results for rolling a dice. Because each outcome is equally likely, the probability of any particular result is $1/6$. Each time the die is rolled, the probability of rolling the 
+same result is multiplied again by $1/6$. For example, the probability of rolling a 6 on a single die roll is $1/6$, so the probability of rolling a 6 each time through five rolls would be calculated as:
+
+$$(1/6) * (1/6) * (1/6) * (1/6) * (1/6) = (1/6)^5 = (1/7776)$$
+
+What if the success case includes more than one result value? In the context of Warhammer, a success may be defined as rolling a 4+ on a dice. This means that a result of 4, 5, or 6 would be considered a success. In this case,
+the probabilities of each result can be added together to determine the probability of the success case as a whole. In this case, the probability of rolling a 4, a 5, or a 6 are all 1/6. So the probability of the success case
+can be calculated as:
+
+$$p(4, 5, or 6) = (1/6)+(1/6)+(1/6) = (3/6) = (1/2)$$
+
+This indicates that the probability of rolling a 4, 5, or 6 is 1/2 or a 50% chance. This makes sense, as half of the results on the dice are considered a successful roll. The probability of rolling a success in each of five dice, then would be calculated as:
+
+$$(1/2) * (1/2) * (1/2) * (1/2) * (1/2) = (1/2)^5 = (1/32)$$
+
+This indicates that the chance of succeeding a roll on all five dice, with success being defined as rolling a 4, 5, or 6, is $1/32$ or 3.13%.
+
  
