@@ -29,6 +29,8 @@ means *any* $k$ trials result in a success. It does not matter which specific tr
 The binomial coefficient represents the number of different ways to choose $k$ elements from a set of $n$ elements without regard to the order of selection. For example, let's say we have a group of five objects, these objects are labeled 1 through 5.
 We need to select any two objects from this group of five. How many ways are there to pick two objects from the group? Since the order of picking doesn't matter, there are a fixed number of *combinations* of objects that can be
 selected from the group, as shown below:
+
+<div style="text-align: center;">
  
 | Selection 1 | Selection 2 |
 |----------|----------|
@@ -41,6 +43,8 @@ selected from the group, as shown below:
 | Object 3 | Object 4 |
 | Object 3 | Object 5 |
 | Object 4 | Object 5 |
+
+</div>
 
 There are ten possible combinations of two objects to be made from a group of five. This number of combinations can be determined by using the binomial coefficient equation.
 
