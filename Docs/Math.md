@@ -95,13 +95,13 @@ where
 Since 1 is the value used to denote 100% probability, the probability of failure can be easily calculated by subtracting the probility of success from 1. From there, the result is multiplied by itself for each trial. For 
 example, the probability of rolling a 5+ on all of five dice is calculated as:
 
-$$p(\text{success}) = \left(\frac{1}{6} + \frac{1}{6}\right)^5 = \left(\frac{2}{6}\right)^5 = \left(\frac{1}{3}\right)^5 = \frac{1}{243}$$
+$$p(\text{success}) = p^k = \left(\frac{1}{6} + \frac{1}{6}\right)^5 = \left(\frac{2}{6}\right)^5 = \left(\frac{1}{3}\right)^5 = \frac{1}{243}$$
 
 where $p = \frac{1}{3}$ and the chance of succeeding all five die rolls is 0.41%.
 
 Then the $p$ value of success for a single trial can be used to calculate the probability of *not* rolling a 5+ on *any* of the five dice:
 
-$$p(\text{failure}) = \left(1-\frac{1}{3}\right)^5 = \left(\frac{2}{3}\right)^5 = \frac{32}{243}$$
+$$p(\text{failure}) = (1-p)^k = \left(1-\frac{1}{3}\right)^5 = \left(\frac{2}{3}\right)^5 = \frac{32}{243}$$
 
 So the chance of failure to roll a 5+ on any of the five dice is 13.17%.
 
