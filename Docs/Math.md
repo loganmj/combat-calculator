@@ -31,6 +31,10 @@ calculated using the equation:
 
 $$\frac{n!}{k!(n-k)!}$$
 
+where 
+- $n$ is the total number of objects
+- $k$ is the number of objects to select
+
 For example, consider a group of five objects, labeled 1 through 5. The task is to select any two objects from this group of five. How many ways exist to pick two objects from the group? Since the order of picking doesn't 
 matter, a fixed number of *combinations* of objects can be selected from the group, as shown below:
  
@@ -48,14 +52,6 @@ matter, a fixed number of *combinations* of objects can be selected from the gro
 | Object 4 | Object 5 |
 
 There are 10 possible combinations of two objects that can be made from a group of five. This number of combinations can be determined by using the binomial coefficient equation.
-
-$$\frac{n!}{k!(n-k)!}$$
-
-where 
-- $n$ is the total number of objects
-- $k$ is the number of objects to select
-
-so
 
 $$\frac{n!}{k!(n-k)!} = \frac{5!}{2!(5-2)!} = 10$$
  
