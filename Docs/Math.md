@@ -4,6 +4,8 @@ in Warhammer 40k has many influencing parameters that must be input by the user 
 success/failure case, and is evaluated independently. All calculations in this project will be based on these discrete die rolls, which in the context of statistics are called a *Bernoulli trial* or *Bernoulli experiment*, and 
 a sequence of such outcomes is called a *Bernoulli process*.
 
+This document outlines the concepts and steps necessary to perform combat calculations for Warhammer 40k, and discloses how probability values are determined.
+
 ## Probability of Success in a Single Trial
 Statistics is based on probability, expressed as a decimal value, with the highest probability being 1. A probability of 1 represents an event that is guaranteed to occur. In statistics, probability of success in a 
 trial is denoted by $p$. Probability can also be expressed as a percent value, with 1 being 100% probability, and all other $p$ values being some probability below 100.
@@ -145,13 +147,30 @@ The table shows that there are 10 possible combinations of two objects that can 
 $$\frac{n!}{k!(n-k)!} = \frac{5!}{2!(5-2)!} = 10$$
 
 ## Probability Mass Function
-Remember that the binomial distribution equation is used to determine the probability of getting a specified number of successful results when executing a given number of trials. For example, when rolling five dice, what is 
-the probability of 
+The *probability mass function* is an equation that can determine the probability for finding a number of successful results in a population of independent trials. In other words, for a group of trials where the results of each 
+trial do not affect the results of the other trials (such as rolling a group of dice), the probability mass function is used to determine the probability that a specified number of those trials were successful. In the context
+of Warhammer, this is the equation used to determine the probability that, given a number of dice to roll and a success case, a specified number of those dice would succeed the roll. The probability mass function is expressed
+as:
 
-- The total number of trials, denoted by $n$.
-- The probability of $k$ trials being successful.
-- The probability of the remaining trials (denoted by $n-k$) being unsuccessful.
-- The binomial coefficient $\binom{n}{k}$, which accounts for all of the different combinations of 
+$$f(k,n,p) = P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
+
+where
+- $k$ represents the number of successful trials
+- $n$ represents the total number of trials
+- $p$ represents the probability of success for a single trial
+
+The probability mass function can be broken down into three parts for better understanding:
+
+- The binomial coefficient $\binom{n}{k}$, which accounts for all of the different possible combinations of trials that contain the desired number of successes
+- The probability $p^k$ of obtaining a sequence of $n$ independent trials in which $k$ trials are successes
+- The probability that the remaining $(n − k)$ trials result in failure, expressed as $(1-p)^{n-k}$
+
+For example, an attack roll requires the player to roll 10 dice that will succeed on a result of 3+. What is the probability that the roll will result in 6 successful rolls? First, the probability of rolling a 3+ on a single
+die can be calculated as:
+
+$$P(X = 6) = \binom{10}{6} \left\frac{4}{6}\right)^6 (1-\left\frac{4}{6}\right))^{10-6} = 210 * (0.6666)^6 * (0.3334)^4 = 0.2277$$
+
+or 22.77%
 
 ## Binomial Distribution
 The core mathematical concept used is the binomial distribution. binomial distribution is a probability distribution that summarizes the likelihood that a given number of successes will occur in a fixed number of trials, 

@@ -36,19 +36,19 @@
         private static void RollDice(int numberOfDice, int successThreshold)
         {
             Console.WriteLine($"Rolling {numberOfDice} dice, succeeding on a roll of {successThreshold}+ ...");
-            var simulation = new CombatSimulation(numberOfDice, successThreshold);
+            var simulation = new CombatProcess(numberOfDice, successThreshold);
 
             // Get the probability of success with one die
-            Console.WriteLine($"Probability of succeeding with one die: {simulation.GetProbabilityOfSuccessForSingleTrial()}");
+            Console.WriteLine($"Probability of succeeding with one die: {simulation.GetAttackerHitProbability()}");
             Console.WriteLine("\n");
 
             // Determine binomial distribution of success with all dice
             // Print the distribution and stats
             Console.WriteLine($"Binomial distribution for {numberOfDice} dice rolling {successThreshold}+:");
-            Console.WriteLine(simulation.GetBinomialDistribution());
-            Console.WriteLine($"Average number of successes: {simulation.GetMean():F2}");
-            Console.WriteLine($"Standard deviation: {simulation.GetStandardDeviation():F2}");
-            Console.WriteLine($"Mode: {simulation.GetMode():F2}");
+            Console.WriteLine(simulation.GetAttackerHitDistribution());
+            Console.WriteLine($"Average number of successes: {simulation.GetAttackerHitMean():F2}");
+            Console.WriteLine($"Standard deviation: {simulation.GetAttackerHitStandardDeviation():F2}");
+            Console.WriteLine($"Mode: {simulation.GetAttackerHitMode():F2}");
             Console.WriteLine("\n");
         }
 
