@@ -6,20 +6,20 @@ namespace CombatCalculator
     /// <summary>
     /// Represents a binomial distribution of trials and successes.
     /// </summary>
-    public class CombatProcess(int numberOfTrials, int attackerSkill)
+    public class CombatProcess(int numberOfHitDice, int attackerHitSkill)
     {
         #region Properties
 
         /// <summary>
         /// The number of trials included in the distribution.
         /// </summary>
-        public int NumberOfTrials = numberOfTrials;
+        public int NumberOfHitDice = numberOfHitDice;
 
         /// <summary>
         /// The ballistic/weapon skill threshold value of the attacker.
         /// Example: If the attacker hits on a 3+, then this value will be 3.
         /// </summary>
-        public int AttackerSkill = attackerSkill;
+        public int AttackerHitSkill = attackerHitSkill;
 
         #endregion
 
@@ -31,7 +31,7 @@ namespace CombatCalculator
         /// <returns></returns>
         public BinomialDistribution GetAttackerHitDistribution() 
         {
-            return Statistics.BinomialDistribution(NumberOfTrials, GetAttackerHitProbability());
+            return Statistics.BinomialDistribution(NumberOfHitDice, GetAttackerHitProbability());
         }
 
         /// <summary>
@@ -40,8 +40,7 @@ namespace CombatCalculator
         /// <returns>A double value containing the probability of success for a single trial.</returns>
         public double GetAttackerHitProbability()
         {
-            // return (6 - (AttackerSkill - 1)) / 6.0;
-            return Statistics.ProbabilityOfSuccess(6, 6 - (AttackerSkill - 1));
+            return Statistics.ProbabilityOfSuccess(6, 6 - (AttackerHitSkill - 1));
         }
 
         /// <summary>
@@ -50,7 +49,7 @@ namespace CombatCalculator
         /// <returns></returns>
         public double GetAttackerHitMean() 
         {
-            return Statistics.BinomialMean(NumberOfTrials, GetAttackerHitProbability());
+            return Statistics.BinomialMean(NumberOfHitDice, GetAttackerHitProbability());
         }
 
         /// <summary>
@@ -60,7 +59,7 @@ namespace CombatCalculator
         public double GetAttackerHitStandardDeviation() 
         {
             var probabilityOfSingleSuccess = GetAttackerHitProbability();
-            return Math.Sqrt(NumberOfTrials * probabilityOfSingleSuccess * (1 - probabilityOfSingleSuccess));
+            return Math.Sqrt(NumberOfHitDice * probabilityOfSingleSuccess * (1 - probabilityOfSingleSuccess));
         }
 
         /// <summary>
@@ -69,7 +68,7 @@ namespace CombatCalculator
         /// <returns></returns>
         public double GetAttackerHitMode() 
         {
-            return Math.Floor((NumberOfTrials + 1) * GetAttackerHitProbability());
+            return Math.Floor((NumberOfHitDice + 1) * GetAttackerHitProbability());
         }
 
         #endregion

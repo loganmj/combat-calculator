@@ -32,23 +32,22 @@
         /// Simulates the rolling of the given number of dice.
         /// </summary>
         /// <param name="numberOfDice"></param>
-        /// <param name="successThreshold"></param>
-        private static void RollDice(int numberOfDice, int successThreshold)
+        /// <param name="hitStat"></param>
+        private static void ProjectHitRoll(CombatProcess process)
         {
-            Console.WriteLine($"Rolling {numberOfDice} dice, succeeding on a roll of {successThreshold}+ ...");
-            var simulation = new CombatProcess(numberOfDice, successThreshold);
+            Console.WriteLine($"Rolling {process.NumberOfHitDice} dice, succeeding on a roll of {process.AttackerHitSkill}+ ...");
 
             // Get the probability of success with one die
-            Console.WriteLine($"Probability of succeeding with one die: {simulation.GetAttackerHitProbability()}");
+            Console.WriteLine($"Probability of succeeding with one die: {process.GetAttackerHitProbability()}");
             Console.WriteLine("\n");
 
             // Determine binomial distribution of success with all dice
             // Print the distribution and stats
-            Console.WriteLine($"Binomial distribution for {numberOfDice} dice rolling {successThreshold}+:");
-            Console.WriteLine(simulation.GetAttackerHitDistribution());
-            Console.WriteLine($"Average number of successes: {simulation.GetAttackerHitMean():F2}");
-            Console.WriteLine($"Standard deviation: {simulation.GetAttackerHitStandardDeviation():F2}");
-            Console.WriteLine($"Mode: {simulation.GetAttackerHitMode():F2}");
+            Console.WriteLine($"Binomial distribution for {process.NumberOfHitDice} dice rolling {process.AttackerHitSkill}+:");
+            Console.WriteLine(process.GetAttackerHitDistribution());
+            Console.WriteLine($"Average number of successes: {process.GetAttackerHitMean():F2}");
+            Console.WriteLine($"Standard deviation: {process.GetAttackerHitStandardDeviation():F2}");
+            Console.WriteLine($"Mode: {process.GetAttackerHitMode():F2}");
             Console.WriteLine("\n");
         }
 
@@ -64,11 +63,16 @@
             while (true)
             {
                 // Get data from user
-                var numberOfDice = GetNumberOfDiceFromUser();
-                var successThreshold = GetSuccessThresholdFromUser();
+                var numberOfHitDice = GetNumberOfDiceFromUser();
+                Console.WriteLine($"Attacker is rolling {numberOfHitDice} hit dice.\n");
 
-                // Roll dice
-                RollDice(numberOfDice, successThreshold);
+                var attackerHitValue = GetSuccessThresholdFromUser();
+                Console.WriteLine($"Attacker hits on {attackerHitValue}s.\n");
+
+                var combatProcess = new CombatProcess(numberOfHitDice, attackerHitValue);
+
+                // Perform hit roll
+                ProjectHitRoll(combatProcess);
             }
         }
 
