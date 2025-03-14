@@ -99,6 +99,11 @@ And if the probability for success/failure is the same in all trials, the probab
 
 $$q^k = (1-p)^k$$
 
+where
+- $p$ is the probability of success in any one trial
+- $k$ is the total number of trials
+- all values of $p$ are equal
+
 If the success case is a result of 3+ (and therefore the fail case is rolling a 1 or a 2), and the die is rolled five times, the probability that the die will *fail* all five times is calculated as:
 
 $$\left(\frac{2}{6}\right)^5 = \left(\frac{1}{3}\right)^5 = \frac{1}{243} = 0.0041$$
@@ -106,17 +111,21 @@ $$\left(\frac{2}{6}\right)^5 = \left(\frac{1}{3}\right)^5 = \frac{1}{243} = 0.00
 or 0.41%
 
 ## The Binomial Coefficient
-The binomial coefficient is used to represent the possible number of *combinations* of $k$ elements from a set of $n$ elements without regard to the order of selection. This coefficient is expressed in shorthand as $\binom{n}{k}$, and is 
+In Warhammer, it is common that combat is resolved by rolling multiple dice at a time. In such a case, it is important to be able to calculate the probability of any number of independent successes within the context of the 
+group of dice. Such a calculation is called the *biomial distribution*. The math required to calculate a binomial distribution will be covered later, after a few more concepts have been explained.
+
+Before a binomial distribution can be can be calculated, it is important to first calculate the *binomial coefficient*. The binomial coefficient is a scalar value used to represent the number of possible *combinations* of 
+elements in a set, ignoring the order of selection. This coefficient is expressed in shorthand as $\binom{n}{k}$, and is 
 calculated using the equation:
 
-$$\frac{n!}{k!(n-k)!}$$
+$$\binom{n}{k} = \frac{n!}{k!(n-k)!}$$
 
 where 
-- $n$ is the total number of objects
+- $n$ is the total number of objects in the set
 - $k$ is the number of objects to select
 
-For example, consider a group of five objects, labeled 1 through 5. The task is to select any two objects from this group of five. How many ways exist to pick two objects from the group? Since the order of picking doesn't 
-matter, a fixed number of *combinations* of objects can be selected from the group, as shown below:
+For example, consider a group of five objects, labeled 1 through 5. The task is to select any two objects from this group of five. How many combinations of two objects exist in the group? Assuming that order does not matter, 
+a fixed number of *combinations* of objects can be selected from the group, as shown below:
  
 | Selection 1 | Selection 2 |
 |----------|----------|
@@ -131,12 +140,13 @@ matter, a fixed number of *combinations* of objects can be selected from the gro
 | Object 3 | Object 5 |
 | Object 4 | Object 5 |
 
-There are 10 possible combinations of two objects that can be made from a group of five. This number of combinations can be determined by using the binomial coefficient equation.
+The table shows that there are 10 possible combinations of two objects that can be made from a group of five. This number of combinations can be determined mathematically by using the binomial coefficient equation:
 
 $$\frac{n!}{k!(n-k)!} = \frac{5!}{2!(5-2)!} = 10$$
 
 ## Probability Mass Function
-Remember that the binomial distribution equation is used to determine the probability of getting a specified number of successful results when executing a given number of trials. For example, when rolling five dice, what is the probability of 
+Remember that the binomial distribution equation is used to determine the probability of getting a specified number of successful results when executing a given number of trials. For example, when rolling five dice, what is 
+the probability of 
 
 - The total number of trials, denoted by $n$.
 - The probability of $k$ trials being successful.
