@@ -16,7 +16,7 @@ rolling any one die does not affect the result of any other die.
 
 The binomial distribution of a fixed number of trials is expressed by the following equation:
 
-$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$
+$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 
 where:
 
