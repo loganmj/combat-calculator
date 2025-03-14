@@ -107,4 +107,4 @@ So the chance of failure to roll a 5+ on any of the five dice is 13.17%.
 
 Incidentally, since the probablity of *not* rolling a 5+ on five dice is the same as the probability for succeeding to roll a 1, 2, 3, or 4 on all five dice, and can alternatively be calculated as:
 
-$$p(\text{1, 2, 3, 4}) = \left(\frac{1}{6}\right) + \frac{1}{6}\right) + \frac{1}{6}\right) + \frac{1}{6}\right)^5 = \left(\frac{4}{6}\right)^5 = \left(\frac{2}{3}\right)^5 = \frac{}{} = \frac{32}{243}$$ or 0.41%
+$$p(\text{1, 2, 3, 4}) = \left(\frac{1}{6}\right) + \left(\frac{1}{6}\right) + \left(\frac{1}{6}\right) + \left(\frac{1}{6}\right)^5 = \left(\frac{4}{6}\right)^5 = \left(\frac{2}{3}\right)^5 = \frac{}{} = \frac{32}{243}$$ or 0.41%
