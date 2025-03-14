@@ -83,4 +83,28 @@ $$\frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} = \left(\f
 
 This indicates that the chance of succeeding a roll on all five dice, with success being defined as rolling a 4, 5, or 6, is $1/32$ or 3.13%.
 
+## Probability of failure
+The probability of failure for a single trial is calculated the same way as the probability of success, but with some simple arithmetic included to represent all results that are *not* the success result(s). To determine the
+
+$$(1-p)^k$$
+
+where
+- $p$ is the probability of success for a single trial.
+- $k$ is the number of trials.
  
+Since 1 is the value used to denote 100% probability, the probability of failure can be easily calculated by subtracting the probility of success from 1. From there, the result is multiplied by itself for each trial. For 
+example, the probability of rolling a 5+ on all of five dice is calculated as:
+
+$$p(\text{success}) = \left(\frac{1}{6} + \frac{1}{6}\right) = \left(\frac{2}{6}\right)^5 = \left(\frac{1}{3}\right)^5 = \frac{1}{243}$$
+
+where $p = \frac{1}{3}$ and the chance of succeeding all five die rolls is 0.41%.
+
+Then the probability of *not* rolling a 5+ on *any* of the five dice is calculated as:
+
+$$p(\text{failure}) = (1-\left(\frac{1}{3}\right))^5 = \left(\frac{2}{3}\right)^5 = \frac{32}{243}$$
+
+So the chance of failure to roll a 5+ on any of the five dice is 13.17%.
+
+Incidentally, since the probablity of *not* rolling a 5+ on five dice is the same as the probability for succeeding to roll a 1, 2, 3, or 4 on all five dice, and can alternatively be calculated as:
+
+$$p(\text{1, 2, 3, 4}) = \left(\frac{1}{6} + \frac{1}{6}\right + \frac{1}{6}\right + \frac{1}{6}\right)^5 = \left(\frac{4}{6}\right)^5 = \left(\frac{2}{3}\right)^5 = \frac{}{} = \frac{32}{243}$$ or 0.41%
