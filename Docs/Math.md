@@ -16,11 +16,11 @@ rolling any one die does not affect the result of any other die.
 
 The binomial distribution of a fixed number of trials is expressed by the following equation:
 
-$$ P(X = k) = \binom{n}{k} p^k (1-p)^{n-k} $$
+$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$
 
 where:
 
-- \( P(X = k) \) is the probability of getting exactly \( k \) successes in \( n \) trials.
-- \( \binom{n}{k} \) is the binomial coefficient, calculated as \( \frac{n!}{k!(n-k)!} \).
-- \( p^k \) is the probability of success raised to the power of \( k \).
-- \( (1-p)^{n-k} \) is the probability of failure raised to the power of \( n-k \).
+- $P(X = k)$ is the probability of getting exactly $k$ successes in $n$ trials.
+- $\binom{n}{k}$ is the binomial coefficient, calculated as $\frac{n!}{k!(n-k)!}$.
+- $p^k$ is the probability of success raised to the power of $k$.
+- $(1-p)^{n-k}$ is the probability of failure raised to the power of $n-k$.
