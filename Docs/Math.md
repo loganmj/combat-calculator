@@ -62,56 +62,46 @@ In Warhammer 40k, success cases are commonly set as 2+, 3+, 4+, 5+, or 6+ (Rolli
 In Warhammer, combat is rarely determined by the roll of a single die. Trials must often be repeated and passed multiple times to be considered a success. In stastics this can be expressed by multiplying together the 
 probabilities of each roll.
 
-$$p_0 * p_1 * ... p_n$$
+$$p_0 * p_1 * p_2 ... * p_n$$
 
 where
-- $p$ is the probability of success for a single trial.
-- $k$ is the number of trials.
+- $p_n$ is the probability of success for the $n^th$ trial.
 
-In the context of dice, there are six possible results for rolling a dice. Because each outcome is equally likely, the probability of any particular result is $\frac{1}{6}$. Each time the die is rolled, the probability of 
-rolling the same result is multiplied again by $\frac{1}{6}$. For example, the probability of rolling a 6 on a single die roll is $\frac{1}{6}$, so the probability of rolling a 6 for every roll in five rolls would be 
-calculated as:
+For example, say the die must be rolled three times. The success case for the first trial is a roll of 3+, the success case for the second trial is 4+, and the success case for the third roll is 5+. That all three trials will 
+result in success is calculated as:
 
-$$\frac{1}{6} * \frac{1}{6} * \frac{1}{6} * \frac{1}{6} * \frac{1}{6} = \left(\frac{1}{6}\right)^5 = \frac{1}{7776}$$
+$$\frac{4}{6} * \frac{3}{6} * frac{2}{6} = \frac{24}{216} = \frac{1}{9}$$ = 0.1111
 
-What if the success case includes more than one result value? In the context of Warhammer, a success may be defined as rolling a 4+ on a dice. This means that a result of 4, 5, or 6 would be considered a success. In this case,
-the probabilities of each result can be added together to determine the probability of the success case as a whole. In this case, the probability of rolling a 4, a 5, or a 6 are all 1/6. So the probability of the success case
-can be calculated as:
+or 11.11%
 
-$$p(4, \text{ }5, \text{ or } 6) = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = \frac{3}{6} = \frac{1}{2}$$
+In some cases, the success case will be the same for all trials in the process, meaning that the probability of success is the same for each trial. In such a case, the equation to calculate the probability of success in all 
+trials can be simplified as:
 
-This indicates that the probability of rolling a 4, 5, or 6 is 1/2 or a 50% chance. This makes sense, as half of the results on the dice are considered a successful roll. The probability of rolling a success in all of five 
-dice, then would be calculated as:
-
-$$\frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} * \frac{1}{2} = \left(\frac{1}{2}\right)^5 = (1/32)$$
-
-This indicates that the chance of succeeding a roll on all five dice, with success being defined as rolling a 4, 5, or 6, is $1/32$ or 3.13%.
-
-## Probability of Failure
-The probability of failure for a single trial is calculated the same way as the probability of success, but with some simple arithmetic included to represent all results that are *not* the success result(s).
-
-$$p(\text{failure}) = q^k = (1-p)^k$$
+$$p^k$$
 
 where
-- $p$ is the probability of success for a single trial.
-- $k$ is the number of trials.
- 
-Since 1 is the value used to denote 100% probability, the probability of failure can be easily calculated by subtracting the probility of success from 1. From there, the result is multiplied by itself for each trial. For 
-example, the probability of rolling a 5+ on all of five dice is calculated as:
+- $p$ is the probability of success in any one trial
+- $k$ is the total number of trials
+- all values of $p$ are equal
 
-$$p(\text{success}) = p^k = \left(\frac{1}{6} + \frac{1}{6}\right)^5 = \left(\frac{2}{6}\right)^5 = \left(\frac{1}{3}\right)^5 = \frac{1}{243}$$
+If the success case is a result of 4+, and the die is rolled five times, the probability that the die will succeed all five times is calculated as:
 
-where $p = \frac{1}{3}$ and the chance of succeeding all five die rolls is 0.41%.
+$$\left(\frac{3}{6}\right)^5 = \left(\frac{1}{2}\right)^5 = \frac{1}{32} = 0.0313$$
 
-Then the $p$ value of success for a single trial can be used to calculate the probability of *not* rolling a 5+ on *any* of the five dice:
+or 3.13%
 
-$$p(\text{failure}) = (1-p)^k = \left(1-\frac{1}{3}\right)^5 = \left(\frac{2}{3}\right)^5 = \frac{32}{243}$$
+## Probability of Failure for Multiple Trials
+The probability of failure for multiple trials is calculated the same way as the probability of success, using the same conversion between success and failure:
 
-So the chance of failure to roll a 5+ on any of the five dice is 13.17%.
+$$q_0 * q_1 * q_2 ... * q_n = (p_0 - 1) * (p_1 - 1) * (p_2 - 1) ... * (p_n - 1)$$
 
-Incidentally, since the probablity of *not* rolling a 5+ on five dice is the same as the probability for succeeding to roll a 1, 2, 3, or 4 on all five dice, and can alternatively be calculated as:
+And if the probability for success/failure is the same in all trials, the probability of failure is calculated as:
 
-$$p(\text{1, 2, 3, 4}) = \left(\frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6}\right)^5 = \left(\frac{4}{6}\right)^5 = \left(\frac{2}{3}\right)^5 = \frac{}{} = \frac{32}{243}$$
+$$q^k = (1-p)^k$$
+
+If the success case is a result of 3+ (and therefore the fail case is rolling a 1 or a 2), and the die is rolled five times, the probability that the die will *fail* all five times is calculated as:
+
+$$\left(\frac{2}{6}\right)^5 = \left(\frac{1}{3}\right)^5 = \frac{1}{243} = 0.0041$$
 
 or 0.41%
 
