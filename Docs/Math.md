@@ -10,7 +10,7 @@ trial is denoted by $p$. Probability can also be expressed as a percent value, w
 
 In the context of a single trial, the probability of success can be calculated as:
 
-$$p = \frac{n}{k}$$
+$$p = \frac{k}{n}$$
 
 where
 - $n$ is the total number of possible results
@@ -23,12 +23,23 @@ $$\frac{1}{6} = 0.1666$$
 or 16.66%.
 
 What if the success case includes more than one result value? In the context of Warhammer, a success may be defined as rolling a 4+ on a dice. This means that a result of 4, 5, or 6 would be considered a success. In this case,
-the probabilities of each possible successful result can be added together to determine the probability of the success case as a whole. In this case, the probability of rolling a 4, a 5, or a 6 are all 1/6. So the probability 
+the probabilities of each possible successful result can be added together to determine the probability of the success case as a whole. The probability of rolling a 4, a 5, or a 6 are all 1/6. So the probability 
 of the entire success case can be calculated as:
 
-$$p(4, \text{ }5, \text{ or } 6) = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = \frac{3}{6} = \frac{1}{2} = 0.5$$
+$$p(text{4, 5, or 6}) = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = \frac{3}{6} = \frac{1}{2} = 0.5$$
 
-This indicates that the probability of rolling a 4, 5, or 6 is a 50% chance. This makes sense, as half of the results on the dice are considered a successful roll.
+Or 50%. This makes sense, as half of the results on the dice are considered a successful roll.
+
+## Probability of Success for Common Cases
+In Warhammer 40k, success cases are commonly set as 2+, 3+, 4+, 5+, or 6+ (Rolling a 1 is almost always considered a failure). Each of these success cases on a single die have the following probabilities:
+
+| Roll | $p$ |
+|----------|----------|
+| 2+ | 83.33% |
+| 3+ | 66.66% |
+| 4+ | 50% |
+| 5+ | 33.33% |
+| 6+ | 16.66% |
 
 ## Probability of Failure in a Single Trial
 Probability of failure is defined as the probability that success will *not* occur, and is denoted by $q$.
