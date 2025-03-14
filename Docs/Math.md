@@ -64,8 +64,9 @@ where
 - $p$ is the probability of success for a single trial.
 - $k$ is the number of trials.
 
-In the context of dice, there are six possible results for rolling a dice. Because each outcome is equally likely, the probability of any particular result is $1/6$. Each time the die is rolled, the probability of rolling the 
-same result is multiplied again by $1/6$. For example, the probability of rolling a 6 on a single die roll is $1/6$, so the probability of rolling a 6 for every roll in five rolls would be calculated as:
+In the context of dice, there are six possible results for rolling a dice. Because each outcome is equally likely, the probability of any particular result is $\frac{1}{6}$. Each time the die is rolled, the probability of 
+rolling the same result is multiplied again by $\frac{1}{6}$. For example, the probability of rolling a 6 on a single die roll is $\frac{1}{6}$, so the probability of rolling a 6 for every roll in five rolls would be 
+calculated as:
 
 $$\frac{1}{6} * \frac{1}{6} * \frac{1}{6} * \frac{1}{6} * \frac{1}{6} = \left(\frac{1}{6}\right)^5 = \frac{1}{7776}$$
 
