@@ -7,7 +7,7 @@ namespace CombatCalculator
     /// The key is the number of successes.
     /// The value is the probability of that result.
     /// </summary>
-    public class BinomialProbability : Dictionary<int, double>
+    public class BinomialDistribution : Dictionary<int, double>
     {
         #region Public Methods
 

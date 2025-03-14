@@ -45,7 +45,7 @@
             // Determine binomial distribution of success with all dice
             // Print the distribution and stats
             Console.WriteLine($"Binomial distribution for {numberOfDice} dice rolling {successThreshold}+:");
-            Console.WriteLine(simulation.GetBinomialProbability());
+            Console.WriteLine(simulation.GetBinomialDistribution());
             Console.WriteLine($"Average number of successes: {simulation.GetMean():F2}");
             Console.WriteLine($"Standard deviation: {simulation.GetStandardDeviation():F2}");
             Console.WriteLine($"Mode: {simulation.GetMode():F2}");

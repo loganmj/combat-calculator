@@ -73,9 +73,9 @@ namespace CombatCalculator
         /// Retrieves the binomial distribution of trial data.
         /// </summary>
         /// <returns>A binomial distribution of results and their respective probabilities.</returns>
-        public BinomialProbability GetBinomialProbability() 
+        public BinomialDistribution GetBinomialDistribution() 
         {
-            var distribution = new BinomialProbability();
+            var distribution = new BinomialDistribution();
 
             for (int i = 0; i <= NumberOfTrials; i++)
             {
