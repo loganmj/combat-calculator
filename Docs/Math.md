@@ -101,7 +101,7 @@ where $p = \frac{1}{3}$ and the chance of succeeding all five die rolls is 0.41%
 
 Then the $p$ value of success for a single trial can be used to calculate the probability of *not* rolling a 5+ on *any* of the five dice:
 
-$$p(\text{failure}) = (1-p)^k = \left(1-\frac{1}{3}\right)^5 = \left(\frac{2}{3}\right)^5 = \frac{32}{243}$$
+$$p(\text{failure}) = (1-p(\text{success}))^k = \left(1-\frac{1}{3}\right)^5 = \left(\frac{2}{3}\right)^5 = \frac{32}{243}$$
 
 So the chance of failure to roll a 5+ on any of the five dice is 13.17%.
 
