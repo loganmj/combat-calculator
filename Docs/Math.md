@@ -15,7 +15,7 @@ $$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 where:
 
 - $P(X = k)$ is the probability of getting exactly $k$ successes.
-- $\binom{n}{k}$ is the binomial coefficient, calculated as $\frac{n!}{k!(n-k)!}$.
+- $\binom{n}{k}$ is the binomial coefficient.
 - $p^k$ is the probability of success raised to the power of $k$.
 - $(1-p)^{n-k}$ is the probability of failure raised to the power of $n-k$.
 
@@ -25,12 +25,14 @@ Each of these pieces are explained further below.
 In statistics, probability is frequently expressed as a function of $P$. In the case of binomial distributions, $P(X=k)$ is used to denote the *probability* that of seeing $k$ successes when all of the trials are run. This 
 means *any* $k$ trials result in a success. It does not matter which specific trials resulted in a success, only that there were exactly $k$ successes in the trial.
 
-# The Binomial coefficient
-The binomial coefficient represents the number of different ways to choose $k$ elements from a set of $n$ elements without regard to the order of selection. For example, let's say we have a group of five objects, these objects are labeled 1 through 5.
-We need to select any two objects from this group of five. How many ways are there to pick two objects from the group? Since the order of picking doesn't matter, there are a fixed number of *combinations* of objects that can be
-selected from the group, as shown below:
+# The Binomial Coefficient
+The binomial coefficient is used to represent the possible number of *combinations* of $k$ elements from a set of $n$ elements without regard to the order of selection. This coefficient is expressed in shorthand as $\binom{n}{k}$, and is 
+calculated using the equation:
 
-<div style="text-align: center;">
+$$\frac{n!}{k!(n-k)!}$$
+
+For example, consider a group of five objects, labeled 1 through 5. The task is to select any two objects from this group of five. How many ways exist to pick two objects from the group? Since the order of picking doesn't 
+matter, a fixed number of *combinations* of objects can be selected from the group, as shown below:
  
 | Selection 1 | Selection 2 |
 |----------|----------|
@@ -44,9 +46,7 @@ selected from the group, as shown below:
 | Object 3 | Object 5 |
 | Object 4 | Object 5 |
 
-</div>
-
-There are ten possible combinations of two objects to be made from a group of five. This number of combinations can be determined by using the binomial coefficient equation.
+There are 10 possible combinations of two objects that can be made from a group of five. This number of combinations can be determined by using the binomial coefficient equation.
 
 $$\frac{n!}{k!(n-k)!}$$
 
