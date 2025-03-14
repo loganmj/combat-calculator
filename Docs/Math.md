@@ -36,6 +36,7 @@ matter, a fixed number of *combinations* of objects can be selected from the gro
  
 | Selection 1 | Selection 2 |
 |----------|----------|
+| Object 1 | Object 2 |
 | Object 1 | Object 3 |
 | Object 1 | Object 4 |
 | Object 1 | Object 5 |
