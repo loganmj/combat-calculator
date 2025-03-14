@@ -67,7 +67,7 @@ where
 In the context of dice, there are six possible results for rolling a dice. Because each outcome is equally likely, the probability of any particular result is $1/6$. Each time the die is rolled, the probability of rolling the 
 same result is multiplied again by $1/6$. For example, the probability of rolling a 6 on a single die roll is $1/6$, so the probability of rolling a 6 each time through five rolls would be calculated as:
 
-$$(1/6) * (1/6) * (1/6) * (1/6) * (1/6) = (1/6)^5 = (1/7776)$$
+$$(\frac{1}{6}) * (1/6) * (1/6) * (1/6) * (1/6) = (1/6)^5 = (1/7776)$$
 
 What if the success case includes more than one result value? In the context of Warhammer, a success may be defined as rolling a 4+ on a dice. This means that a result of 4, 5, or 6 would be considered a success. In this case,
 the probabilities of each result can be added together to determine the probability of the success case as a whole. In this case, the probability of rolling a 4, a 5, or a 6 are all 1/6. So the probability of the success case
