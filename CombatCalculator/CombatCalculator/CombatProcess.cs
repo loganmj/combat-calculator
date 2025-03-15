@@ -1,5 +1,4 @@
 ﻿using CombatCalculator.Lib;
-using System.Text;
 
 namespace CombatCalculator
 {
@@ -26,15 +25,6 @@ namespace CombatCalculator
         #region Public Methods
 
         /// <summary>
-        /// Returns a binomial distribution of results based on the process data.
-        /// </summary>
-        /// <returns></returns>
-        public BinomialDistribution GetAttackerHitDistribution() 
-        {
-            return Statistics.BinomialDistribution(NumberOfHitDice, GetAttackerHitProbability());
-        }
-
-        /// <summary>
         /// Returns the probability of succeeding a roll with a single dice, given the desired success threshold.
         /// </summary>
         /// <returns>A double value containing the probability of success for a single trial.</returns>
@@ -44,31 +34,21 @@ namespace CombatCalculator
         }
 
         /// <summary>
-        /// Gets the average results of the process.
+        /// Returns a binomial distribution of attack roll results based on the process data.
         /// </summary>
-        /// <returns></returns>
-        public double GetAttackerHitMean() 
+        /// <returns>A BinomialDistribution object containing the </int></returns>
+        public ProbabilityDistribution GetAttackerHitBinomialDistribution()
         {
-            return Statistics.BinomialMean(NumberOfHitDice, GetAttackerHitProbability());
+            return Statistics.BinomialDistribution(NumberOfHitDice, GetAttackerHitProbability());
         }
 
         /// <summary>
-        /// Gets the standard deviation of the process.
+        /// Returns the upper cumulative distribution of the attacker's hit roll.
         /// </summary>
         /// <returns></returns>
-        public double GetAttackerHitStandardDeviation() 
+        public ProbabilityDistribution GetAttackerHitUpperCumulativeDistribution()
         {
-            var probabilityOfSingleSuccess = GetAttackerHitProbability();
-            return Math.Sqrt(NumberOfHitDice * probabilityOfSingleSuccess * (1 - probabilityOfSingleSuccess));
-        }
-
-        /// <summary>
-        /// Gets the most common result of the process.
-        /// </summary>
-        /// <returns></returns>
-        public double GetAttackerHitMode() 
-        {
-            return Math.Floor((NumberOfHitDice + 1) * GetAttackerHitProbability());
+            return Statistics.UpperCumulativeDistribution(NumberOfHitDice, GetAttackerHitProbability());
         }
 
         #endregion

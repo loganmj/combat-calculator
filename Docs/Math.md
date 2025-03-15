@@ -205,9 +205,42 @@ Binomial distribution of an attack roll of 10 dice, hitting on 3+:
 | 9 | 8.67% |
 | 10 | 1.73% |
 
+## Binomial Sums
+Probability mass functions can be added together to form binomial sums. A binomial sum shows the combined probability of getting different amounts of successes in the trials. For example, using the table from the previous 
+section, it can be determined that the probability of getting either 5 or 6 successes is the sum of their individual probabilities:
+
+$$P((X = 5) + (X = 6)) = P(X = 5) + P(X = 6) = 0.1366 + 0.2276 = 0.3642$$
+
+or 36.42% chance of rolling either 5 or 6 successes.
+
+This is especially useful when calculating *cumulative* probabilities. A cumulative probabilty is a sum of all probabilities up to and including a certain number of successes. That is, a cumulative probability will be a 
+calculation of either $P(X \leq k)$ (lower cumulative probability) or $P(X \geq k)$ (upper cumulative probability).
+
+Cumulative probabilities can be expressed using the following equations:
+
+Lower Cumulative Probability
+$$F(n,k,p) = P(X \leq k) = \displaystyle\sum_{i=0}^k \binom{n}{i} p^i (1-p)^{n-i}$$
+
+Upper Cumulative Probability
+$$F(n,k,p) = P(X \geq k) = \displaystyle\sum_{i=k}^n \binom{n}{i} p^i (1-p)^{n-i}$$
+
+where
+- $n$ is the total number of trials
+- $k$ is the number of successes
+- $p$ is the probability of success for a single trial
+
+Notice that these equations are just the probability mass function put through a summation from either 0 to $k$ (lower cumulative probability) or from $k$ to $n$ (upper cumulative probability).
+
+Continuing the example of rolling 10 dice, and needing a roll of 3+ to succeed, it may be useful to calculate the probability of rolling *at least* 6 successes. In this case, an upper cumulative probability function can be used 
+like so:
+
+$$P(X \geq 6) = \displaystyle\sum_{i=6}^10 \binom{10}{i} \left\frac{4}{6}(\right)^i \left(1-\left\frac{4}{6}(\right)\right)^{10-i}$$
+
 ## Cumulative Distribution
-The cumulative distribution is similar to the binomial distribution, but instead of determining the probability of getting exactly $k$ successful results, the cumulative distribution shows probabilities of getting $\leq k$ 
-successes. In the context of Warhammer, when rolling a group of 10 dice, it may be useful to calculate the probability of rolling less than or equal to 6 successes.
+
+The cumulative distribution is similar to the binomial distribution, but instead of determining the probability of getting exactly $k$ successful results, the cumulative distribution shows probabilities of getting either 
+$\leq k$ (lower cumulative distribution) or $/geq k$ (upper cumulative distribution) successes. In the context of Warhammer, when rolling a group of 10 dice, it may be useful to calculate the probability of rolling at least 
+6 successes.
 
 The equation used to calculate the cumulative probability for each possible number of successes is as follows:
 
@@ -216,6 +249,4 @@ $$F(n,k,p) = P(X \leq k) = \displaystyle\sum_{i=0}^k \binom{n}{i} p^i (1-p)^{n-i
 where
 - $n$ is the total number of trials
 - $k$ is the number of successes
-- $p$ is the probability of success for a single trial0
-
-Notice that this equation is just the probability mass function put through a summation from 0 to $k$.
+- $p$ is the probability of success for a single trial

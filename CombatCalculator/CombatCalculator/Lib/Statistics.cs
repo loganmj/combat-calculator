@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CombatCalculator.Lib
+﻿namespace CombatCalculator.Lib
 {
     /// <summary>
     /// A static class that provides statstical math functions.
@@ -87,40 +81,164 @@ namespace CombatCalculator.Lib
         }
 
         /// <summary>
-        /// Retrieves the binomial distribution of trial data.
+        /// Calculates the binomial distribution of trial data.
         /// </summary>
         /// <param name="numberOfTrials">The number of trials in the process.</param>
         /// <param name="probability">The probability of success for a single trial.</param>
         /// <returns>A binomial distribution of trial results and their respective probabilities.</returns>
-        public static BinomialDistribution BinomialDistribution(int numberOfTrials, double probability)
+        public static ProbabilityDistribution BinomialDistribution(int numberOfTrials, double probability)
         {
-            var distribution = new BinomialDistribution();
+            var distribution = new ProbabilityDistribution();
 
-            for (int i = 0; i <= numberOfTrials; i++)
+            for (int k = 0; k <= numberOfTrials; k++)
             {
-                distribution.Add(i, ProbabilityMassFunction(numberOfTrials, i, probability));
+                distribution.Add(k, ProbabilityMassFunction(numberOfTrials, k, probability));
             }
 
             return distribution;
         }
 
         /// <summary>
-        /// Gets the projected mean value for a set of trials.
+        /// Calculates the lower cumulative probability of trial data.
+        /// Lower cumulative probability is the probability of achieving a result less than or equal to the given number of successes.
         /// </summary>
-        /// <param name="numberOfTrials">The total number of trials.</param>
-        /// <param name="probability">The probability of success for a single trial.</param>
-        /// <returns></returns>
-        public static double BinomialMean(int numberOfTrials, double probability)
+        /// <param name="numberOfTrials"></param>
+        /// <param name="numberOfSuccesses"></param>
+        /// <param name="probability"></param>
+        /// <returns>A double containing the cumulative probability value.</returns>
+        public static double LowerCumulativeProbability(int numberOfTrials, int numberOfSuccesses, double probability)
         {
-            return numberOfTrials * probability;
+            double cumulativeProbability = 0;
+
+            for (int i = 0; i <= numberOfSuccesses; i++)
+            {
+                cumulativeProbability += ProbabilityMassFunction(numberOfTrials, i, probability);
+            }
+
+            return cumulativeProbability;
         }
 
-        /*
+        /// <summary>
+        /// Calculates the lower cumulative distribution of trial data.
+        /// </summary>
+        /// <param name="numberOfTrials"></param>
+        /// <param name="probability"></param>
+        /// <returns>A cumulative distribution of trial results and their respective probabilities.</returns>
+        public static ProbabilityDistribution LowerCumulativeDistribution(int numberOfTrials, double probability)
+        {
+            var distribution = new ProbabilityDistribution();
 
-        public static double BinomialMode() { }
-        public static double BinomialStandardDeviation() { }
+            for (int k = 0; k <= numberOfTrials; k++)
+            {
+                distribution.Add(k, LowerCumulativeProbability(numberOfTrials, k, probability));
+            }
 
-        */
+            return distribution;
+        }
+
+        /// <summary>
+        /// Calculates the upper cumulative probability of trial data.
+        /// Upper cumulative probability is the probability of achieving a result greater than or equal to the given number of successes.
+        /// </summary>
+        /// <param name="numberOfTrials"></param>
+        /// <param name="numberOfSuccesses"></param>
+        /// <param name="probability"></param>
+        /// <returns>A double containing the cumulative probability value.</returns>
+        public static double UpperCumulativeProbability(int numberOfTrials, int numberOfSuccesses, double probability)
+        {
+            double cumulativeProbability = 0;
+
+            for (int i = numberOfSuccesses; i <= numberOfTrials; i++)
+            {
+                cumulativeProbability += ProbabilityMassFunction(numberOfTrials, i, probability);
+            }
+
+            return cumulativeProbability;
+        }
+
+        /// <summary>
+        /// Calculates the upper cumulative distribution of trial data.
+        /// </summary>
+        /// <param name="numberOfTrials"></param>
+        /// <param name="probability"></param>
+        /// <returns></returns>
+        public static ProbabilityDistribution UpperCumulativeDistribution(int numberOfTrials, double probability)
+        {
+            var distribution = new ProbabilityDistribution();
+
+            for (int k = 0; k <= numberOfTrials; k++)
+            {
+                distribution.Add(k, UpperCumulativeProbability(numberOfTrials, k, probability));
+            }
+
+            return distribution;
+        }
+
+        /// <summary>
+        /// Calculates the mean value of a probability distribution.
+        /// </summary>
+        /// <param name="distribution"></param>
+        /// <returns></returns>
+        public static double GetMean(this ProbabilityDistribution distribution)
+        {
+            double mean = 0;
+
+            foreach (var result in distribution)
+            {
+                mean += result.Key * result.Value;
+            }
+            
+            return mean;
+        }
+
+        /// <summary>
+        /// Calculates the median value of a probability distribution.
+        /// </summary>
+        /// <param name="distribution"></param>
+        /// <returns></returns>
+        public static double GetMedian(this ProbabilityDistribution distribution)
+        {
+            double cumulativeProbability = 0.5;
+
+            foreach (var result in distribution)
+            {
+                cumulativeProbability -= result.Value;
+
+                if (cumulativeProbability <= 0)
+                {
+                    return result.Key;
+                }
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Calculates the mode value of a probability distribution.
+        /// </summary>
+        /// <param name="distribution"></param>
+        /// <returns></returns>
+        public static int GetMode(this ProbabilityDistribution distribution)
+        {
+            return distribution.Aggregate((max, result) => result.Value > max.Value ? result : max).Key;
+        }
+
+        /// <summary>
+        /// Calculates the standard deviation of a probability distribution.
+        /// </summary>
+        /// <param name="distribution"></param>
+        /// <returns></returns>
+        public static double GetStandardDeviation(this ProbabilityDistribution distribution)
+        {
+            double variance = 0;
+
+            foreach (var result in distribution)
+            {
+                variance += Math.Pow(result.Key - (double)GetMean(distribution), 2) * result.Value;
+            }
+
+            return Math.Sqrt(variance);
+        }
 
         #endregion
     }
