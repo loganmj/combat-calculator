@@ -28,7 +28,7 @@ What if the success case includes more than one result value? In the context of 
 the probabilities of each possible successful result can be added together to determine the probability of the success case as a whole. The probability of rolling a 4, a 5, or a 6 are all 1/6. So the probability 
 of the entire success case can be calculated as:
 
-$$p(text{4, 5, or 6}) = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = \frac{3}{6} = \frac{1}{2} = 0.5$$
+$$p(\text{4, 5, or 6}) = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = \frac{3}{6} = \frac{1}{2} = 0.5$$
 
 Or 50%. This makes sense, as half of the results on the dice are considered a successful roll.
 
