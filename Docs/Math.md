@@ -165,30 +165,35 @@ The probability mass function can be broken down into three parts for better und
 - The probability $p^k$ of obtaining a sequence of $n$ independent trials in which $k$ trials are successes
 - The probability that the remaining $(n − k)$ trials result in failure, expressed as $(1-p)^{n-k}$
 
-For example, an attack roll requires the player to roll 10 dice that will succeed on a result of 3+. What is the probability that the roll will result in 6 successful rolls? First, the probability of rolling a 3+ on a single
-die can be calculated as:
+For example, an attack roll requires the player to roll 10 dice that will succeed on a result of 3+. What is the probability that exactly six of the dice will result in a successful roll? This can be calculated using the 
+probability mass function as follows:
 
-$$P(X = 6) = \binom{10}{6} \left\frac{4}{6}\right)^6 (1-\left\frac{4}{6}\right))^{10-6} = 210 * (0.6666)^6 * (0.3334)^4 = 0.2277$$
+$$P(X = 6) = \binom{10}{6} \left\frac{4}{6}\right)^6 (1-\left\frac{4}{6}\right))^{10-6} = 210 * (0.6666)^6 * (0.3334)^4 = 0.2276$$
 
-or 22.77%
+or 22.76%
 
 ## Binomial Distribution
-The core mathematical concept used is the binomial distribution. binomial distribution is a probability distribution that summarizes the likelihood that a given number of successes will occur in a fixed number of trials, 
-assuming that each trial has exactly two outcomes: success or failure. The binomial distribution also assumes that each trial is independent, that is, that the success or failure of any single triea does not affect the success 
-or failure of any other trial. For example, in the context of this project, a trial would be the roll of a single die. Since a die roll has six possible outcomes, we have to define which outcome(s) are considered success, and 
-which are failure. In Warhammer, success is typically defined as rolling a specified value or higher. If the success case is defined as rolling a 3+, then rolling any of the values 3, 4, 5, or 6 is considered a success, and 
-rolling a 1 or 2 is considered a failure. Each die roll is independent. The result of rolling any one die does not affect the result of any other die.
+The binomial distribution is a discrete probability distribution that displays the probabilities of all of the possible results of $n$ trials. In essence, a binomial distribution is a set of probability mass functions that
+give the probability for every possible number of successes in a set of trials. In the context of Warhammer, a binomial distribution of a combat roll will show the computed probability for each number of successfull results
+when all of the dice have been rolled.
 
-The binomial distribution of a fixed number of trials is expressed by the following equation:
+In the previous section, it was shown how the probability mass function could be used to calculate the probability of getting 6 successes when rolling 10 dice that succeed on a roll of 3+. Further probability mass calculations
+could be used to determine the probability of each possible number of successes (from 0 to 10). The result would be the binomial distribution of the attack roll. The table below shows the results of calculating the binomial
+distribution of this attack roll:
 
-$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
+Binomial distribution of an attack roll of 10 dice, hitting on 3+:
 
-where:
-
-- $P(X = k)$ is the probability of getting exactly $k$ successes.
-- $\binom{n}{k}$ is the binomial coefficient.
-- $p^k$ is the probability of success for $k$ trials.
-- $(1-p)^{n-k}$ is the probability of failure for $n-k$ trials.
-
-Each of these pieces are explained further below.
+| Successes | $p$ |
+|----------|----------|
+| 0 | 0.00% |
+| 1 | 0.03% |
+| 2 | 0.30% |
+| 3 | 1.63% |
+| 4 | 5.69% |
+| 5 | 13.66% |
+| 6 | 22.76% |
+| 7 | 26.01% |
+| 8 | 19.51% |
+| 9 | 8.67% |
+| 10 | 1.73% |
 
