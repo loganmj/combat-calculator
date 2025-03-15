@@ -26,7 +26,7 @@
             // return !int.TryParse(Console.ReadLine(), out int successThreshold) ? 1 : successThreshold;
             var successThreshold = 0;
 
-            if(!int.TryParse(Console.ReadLine(), out successThreshold))
+            if(!int.TryParse(Console.ReadLine(), out successThreshold) || successThreshold < 1 || successThreshold > 6)
             {
                 Console.WriteLine($"Invalid success value, defaulting to 3.");
                 successThreshold = 3;
@@ -51,8 +51,10 @@
             // Determine binomial distribution of success with all dice
             // Print the distribution and stats
             Console.WriteLine($"Binomial distribution for {process.NumberOfHitDice} dice rolling {process.AttackerHitSkill}+:");
-            Console.WriteLine(process.GetAttackerHitDistribution());
+            var attackDistribution = process.GetAttackerHitDistribution();
+            Console.WriteLine(attackDistribution);
             Console.WriteLine($"Average number of successes: {process.GetAttackerHitMean():F2}");
+            Console.WriteLine($"BD Mean: {attackDistribution.GetMean():F2}");
             Console.WriteLine($"Standard deviation: {process.GetAttackerHitStandardDeviation():F2}");
             Console.WriteLine($"Mode: {process.GetAttackerHitMode():F2}");
             Console.WriteLine("\n");
