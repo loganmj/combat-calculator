@@ -211,4 +211,4 @@ successes. In the context of Warhammer, when rolling a group of 10 dice, it may 
 
 The cumulative distribution can be calculated using the following equation:
 
-$$F(k,n,p) = P(X leq k) = \displaystyle\sum_{i=0}^k \binom{n}{i} p^i (1-p)^{n-i}$$
+$$F(k,n,p) = P(X \leq k) = \displaystyle\sum_{i=0}^k \binom{n}{i} p^i (1-p)^{n-i}$$
