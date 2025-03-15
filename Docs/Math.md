@@ -177,6 +177,14 @@ The binomial distribution is a discrete probability distribution that displays t
 give the probability for every possible number of successes in a set of trials. In the context of Warhammer, a binomial distribution of a combat roll will show the computed probability for each number of successfull results
 when all of the dice have been rolled.
 
+A binomial distribution function is expressed using the following notation:
+
+$$B(n,p)$$
+
+where
+- $n$ is the number of independent trials.
+- $p$ is the probability of success for any given trial.
+
 In the previous section, it was shown how the probability mass function could be used to calculate the probability of getting 6 successes when rolling 10 dice that succeed on a roll of 3+. Further probability mass calculations
 could be used to determine the probability of each possible number of successes (from 0 to 10). The result would be the binomial distribution of the attack roll. The table below shows the results of calculating the binomial
 distribution of this attack roll.
