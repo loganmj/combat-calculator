@@ -234,19 +234,27 @@ Notice that these equations are just the probability mass function put through a
 Continuing the example of rolling 10 dice, and needing a roll of 3+ to succeed, it may be useful to calculate the probability of rolling *at least* 6 successes. In this case, an upper cumulative probability function can be used 
 like so:
 
-$$P(X \geq 6) = \displaystyle\sum_{i=6}^10 \binom{10}{i} \left\frac{4}{6}(\right)^i \left(1-\left\frac{4}{6}(\right)\right)^{10-i}$$
+$$P(X \geq 6) = \displaystyle\sum_{i=6}^10 \binom{10}{i} \left\frac{4}{6}(\right)^i \left(1-\left\frac{4}{6}(\right)\right)^{10-i} = 0.7869$$
+
+or 78.69% chance of rolling at least 6 successes.
 
 ## Cumulative Distribution
+The cumulative distribution is similar to the binomial distribution, but it displays the set of all cumulative probabilities (either upper or lower bound) for a set of trials. The upper cumulative distribution for rolling 10 dice
+with a success being a roll of 3+ is shown below:
 
-The cumulative distribution is similar to the binomial distribution, but instead of determining the probability of getting exactly $k$ successful results, the cumulative distribution shows probabilities of getting either 
-$\leq k$ (lower cumulative distribution) or $/geq k$ (upper cumulative distribution) successes. In the context of Warhammer, when rolling a group of 10 dice, it may be useful to calculate the probability of rolling at least 
-6 successes.
+| Successes | $p$ |
+|----------|----------|
+| 0 | 100.00% |
+| 1 | 100.00% |
+| 2 | 99.96% |
+| 3 | 99.66% |
+| 4 | 98.03% |
+| 5 | 92.34% |
+| 6 | 78.69% |
+| 7 | 55.93% |
+| 8 | 29.91% |
+| 9 | 10.40% |
+| 10 | 1.73% |
 
-The equation used to calculate the cumulative probability for each possible number of successes is as follows:
-
-$$F(n,k,p) = P(X \leq k) = \displaystyle\sum_{i=0}^k \binom{n}{i} p^i (1-p)^{n-i}$$
-
-where
-- $n$ is the total number of trials
-- $k$ is the number of successes
-- $p$ is the probability of success for a single trial
+Notice that the data shows an average roll should always produce at least 1 success. Cumulative data can be useful for predicting whether a roll is likely to produce at least some number of successes, and can be used to help 
+make strategic decisions.
