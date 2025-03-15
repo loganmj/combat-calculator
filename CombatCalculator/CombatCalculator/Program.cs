@@ -14,7 +14,6 @@
         /// <returns>The number of dice to roll.</returns>
         private static int GetNumberOfDiceFromUser()
         {
-            Console.WriteLine("Enter number of dice to roll:");
             return !int.TryParse(Console.ReadLine(), out int numberOfDice) ? 0 : numberOfDice;
         }
 
@@ -24,8 +23,16 @@
         /// <returns>The success threshold.</returns>
         private static int GetSuccessThresholdFromUser() 
         {
-            Console.WriteLine("Enter a success threshold from 1 to 6:");
-            return !int.TryParse(Console.ReadLine(), out int successThreshold) ? 1 : successThreshold;
+            // return !int.TryParse(Console.ReadLine(), out int successThreshold) ? 1 : successThreshold;
+            var successThreshold = 0;
+
+            if(!int.TryParse(Console.ReadLine(), out successThreshold))
+            {
+                Console.WriteLine($"Invalid success value, defaulting to 3.");
+                successThreshold = 3;
+            }
+
+            return successThreshold;
         }
 
         /// <summary>
@@ -63,9 +70,11 @@
             while (true)
             {
                 // Get data from user
+                Console.WriteLine("Enter number of hit dice to roll:");
                 var numberOfHitDice = GetNumberOfDiceFromUser();
                 Console.WriteLine($"Attacker is rolling {numberOfHitDice} hit dice.\n");
 
+                Console.WriteLine("Enter a success threshold from 1 to 6:");
                 var attackerHitValue = GetSuccessThresholdFromUser();
                 Console.WriteLine($"Attacker hits on {attackerHitValue}s.\n");
 

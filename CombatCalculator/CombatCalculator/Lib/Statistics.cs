@@ -21,7 +21,7 @@ namespace CombatCalculator.Lib
         /// <returns></returns>
         public static double ProbabilityOfSuccess(int numberOfPossibleResults, int numberOfSuccessfulResults)
         {
-            return numberOfSuccessfulResults / numberOfPossibleResults;
+            return (double)numberOfSuccessfulResults / numberOfPossibleResults;
         }
 
         /// <summary>
