@@ -205,10 +205,17 @@ Binomial distribution of an attack roll of 10 dice, hitting on 3+:
 | 9 | 8.67% |
 | 10 | 1.73% |
 
-## Cumulative distribution
+## Cumulative Distribution
 The cumulative distribution is similar to the binomial distribution, but instead of determining the probability of getting exactly $k$ successful results, the cumulative distribution shows probabilities of getting $\leq k$ 
 successes. In the context of Warhammer, when rolling a group of 10 dice, it may be useful to calculate the probability of rolling less than or equal to 6 successes.
 
-The cumulative distribution can be calculated using the following equation:
+The equation used to calculate the cumulative probability for each possible number of successes is as follows:
 
-$$F(k,n,p) = P(X \leq k) = \displaystyle\sum_{i=0}^k \binom{n}{i} p^i (1-p)^{n-i}$$
+$$F(n,k,p) = P(X \leq k) = \displaystyle\sum_{i=0}^k \binom{n}{i} p^i (1-p)^{n-i}$$
+
+where
+- $n$ is the total number of trials
+- $k$ is the number of successes
+- $p$ is the probability of success for a single trial0
+
+Notice that this equation is just the probability mass function put through a summation from 0 to $k$.
