@@ -234,7 +234,7 @@ Notice that these equations are just the probability mass function put through a
 Continuing the example of rolling 10 dice, and needing a roll of 3+ to succeed, it may be useful to calculate the probability of rolling *at least* 6 successes. In this case, an upper cumulative probability function can be used 
 like so:
 
-$$P(X \geq 6) = \displaystyle\sum_{i=6}^10 \binom{10}{i} \left\frac{4}{6}(\right)^i \left(1-\left\frac{4}{6}(\right)\right)^{10-i} = 0.7869$$
+$$P(X \geq 6) = \displaystyle\sum_{i=6}^10 \binom{10}{i} \left(\frac{4}{6}\right)^i \left(1-\left(\frac{4}{6}\right)\right)^{10-i} = 0.7869$$
 
 or 78.69% chance of rolling at least 6 successes.
 
