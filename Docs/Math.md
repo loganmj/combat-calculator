@@ -219,9 +219,11 @@ calculation of either $P(X \leq k)$ (lower cumulative probability) or $P(X \geq 
 Cumulative probabilities can be expressed using the following equations:
 
 Lower Cumulative Probability
+
 $$F(n,k,p) = P(X \leq k) = \displaystyle\sum_{i=0}^k \binom{n}{i} p^i (1-p)^{n-i}$$
 
 Upper Cumulative Probability
+
 $$F(n,k,p) = P(X \geq k) = \displaystyle\sum_{i=k}^n \binom{n}{i} p^i (1-p)^{n-i}$$
 
 where
