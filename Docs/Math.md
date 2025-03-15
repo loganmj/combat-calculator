@@ -168,7 +168,7 @@ The probability mass function can be broken down into three parts for better und
 For example, an attack roll requires the player to roll 10 dice that will succeed on a result of 3+. What is the probability that exactly six of the dice will result in a successful roll? This can be calculated using the 
 probability mass function as follows:
 
-$$P(X = 6) = \binom{10}{6} \left(\frac{4}{6}\right)^6 (1-\left(\frac{4}{6}\right))^{10-6} = 210 * (0.6666)^6 * (0.3334)^4 = 0.2276$$
+$$P(X = 6) = \binom{10}{6} \left(\frac{4}{6}\right)^6 \left(1-\left(\frac{4}{6}\right)\right)^{10-6} = 210 * (0.6666)^6 * (0.3334)^4 = 0.2276$$
 
 or 22.76%
 
