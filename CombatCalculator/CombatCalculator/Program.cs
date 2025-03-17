@@ -98,7 +98,7 @@ namespace CombatCalculator
         {
             Console.WriteLine($"Projecting failed save rolls for an attack with {attacker.WeaponAttacks} hits, a hit skill of {attacker.HitSkill}+, "
                               + $"a successful wound roll being {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+, "
-                              + $"a successful armor save roll being {defender.ArmorSave + attacker.WeaponArmorPierce}+ (adjusted for armor pierce),");
+                              + $"a successful armor save roll being {CombatMath.GetAdjustedArmorSave(attacker, defender)}+ (adjusted for armor pierce),");
 
             // Get the probability of failure with any one armor save roll.
             Console.WriteLine($"Probability of any one armor save failing: {CombatMath.GetFailedSaveProbability(attacker, defender) * 100:F2}%");
@@ -156,7 +156,11 @@ namespace CombatCalculator
 
                 Console.WriteLine("Enter defender's Armor Save stat (1-6):");
                 var defenderArmorSave = GetDieSuccessThresholdFromUser();
-                Console.WriteLine($"Defender's armor save is {defenderArmorSave}.\n");
+                Console.WriteLine($"Defender's armor save is {defenderArmorSave}+.\n");
+
+                Console.WriteLine("Enter defender's Invulnerable Save stat (1-6, enter 7 if defender does not have an Invulnerable Save):");
+                var defenderInvulnerableSave = GetPositiveIntegerFromUser();
+                Console.WriteLine($"Defender's invulnerable save is {defenderInvulnerableSave}+.\n");
 
                 // Create attacker object
                 var attacker = new AttackerDTO
@@ -172,7 +176,8 @@ namespace CombatCalculator
                 var defender = new DefenderDTO
                 {
                     Toughness = defenderToughness,
-                    ArmorSave = defenderArmorSave
+                    ArmorSave = defenderArmorSave,
+                    InvulnerableSave = defenderInvulnerableSave
                 };
 
                 // Perform hit roll

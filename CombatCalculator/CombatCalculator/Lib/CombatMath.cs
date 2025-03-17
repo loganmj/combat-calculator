@@ -178,6 +178,19 @@ namespace CombatCalculator.Lib
         }
 
         /// <summary>
+        /// Returns the adjusted armor save of the defender after applying the attacker's armor pierce.
+        /// </summary>
+        /// <param name="attacker"></param>
+        /// <param name="defender"></param>
+        /// <returns></returns>
+        public static int GetAdjustedArmorSave(AttackerDTO attacker, DefenderDTO defender) 
+        {
+            // If the defender has an invulnerable save, and the invulnerable save is lower than the regular save after applying armor pierce,
+            // then use the invulnerable save.
+            return Math.Min(defender.ArmorSave + attacker.WeaponArmorPierce, defender.InvulnerableSave);
+        }
+
+        /// <summary>
         /// Returns the probability of the attacker passing their hit and wound roll, and the defender failing their save, for any one attack.
         /// </summary>
         /// <param name="attacker"></param>
@@ -185,7 +198,7 @@ namespace CombatCalculator.Lib
         /// <returns></returns>
         public static double GetFailedSaveProbability(AttackerDTO attacker, DefenderDTO defender)
         {
-            return GetWoundProbability(attacker, defender) * (1 - Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(defender.ArmorSave) - attacker.WeaponArmorPierce));
+            return GetWoundProbability(attacker, defender) * (1 - Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(GetAdjustedArmorSave(attacker, defender))));
         }
 
         /// <summary>
