@@ -438,3 +438,19 @@ where
 - $n$ is the total number of possible results
 - $k$ is the success threshold value
 - $j$ is the attacker's weapon Armor Pierce stat
+
+## Factoring in Invulnerable saves
+In Warhammer 40k, units can have an Invulnerable Save stat. An invulnerable save is an alternative save stat that puts an upper limit on the effect of armor pierce. For example, Space Marine Terminators have a Save stat of 2+ 
+and an Invulnerable Save stat of 4+. This means that the effects of armor pierce (or any similar effect that negatively impacts the save value) can at worst reduce the effective save stat to a 4+. If a unit of Space Marine
+Terminators were attacked with a weapon that had an Armor Pierce of 3, then instead of their Save stat being reduced to 5+ for the calculation, the Invulnerable Save value of 4+ is used instead.
+
+When calculating the effect of armor pierce on the save roll, the invulnerable save can be factored in as follows:
+
+$$I = \min((n - (k - 1) + j), (h))$$
+
+where
+- $I$ represents the effective save value
+- $n$ is the total number of possible results
+- $k$ is the success threshold value
+- $j$ is the attacker's weapon Armor Pierce stat
+- $h$ is the defender's Invulnerable Save stat

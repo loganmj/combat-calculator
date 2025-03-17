@@ -245,7 +245,6 @@ namespace CombatCalculator.Lib
             return Statistics.UpperCumulativeDistribution(GetNumberOfAttacks(attacker), GetFailedSaveProbability(attacker, defender));
         }
 
-
         #endregion
     }
 }
