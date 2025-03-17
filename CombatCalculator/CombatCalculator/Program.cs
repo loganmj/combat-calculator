@@ -48,28 +48,19 @@ namespace CombatCalculator
         /// <param name="hitStat"></param>
         private static void ProjectHitRoll(AttackerDTO attacker)
         {
-            Console.WriteLine($"Attacker is making {attacker.NumberOfAttacks} attacks, succeeding on a roll of {attacker.HitSkill}+ ...");
+            Console.WriteLine($"Attacker is rolling {attacker.NumberOfAttacks} hits, succeeding on a roll of {attacker.HitSkill}+ ...");
 
             // Get the probability of success with one die
-            Console.WriteLine($"Probability of any one attack succeeding: {CombatMath.GetAttackerHitProbability(attacker) * 100:F2}%");
-            Console.WriteLine("");
-
-            // Determine binomial distribution of success with all dice
-            // Print the distribution and stats
-            Console.WriteLine($"Binomial distribution for {attacker.NumberOfAttacks} dice rolling {attacker.HitSkill}+:");
-            var attackBinomialDistribution = CombatMath.GetAttackerHitBinomialDistribution(attacker);
-            Console.WriteLine(attackBinomialDistribution);
-            Console.WriteLine($"Mean: {Statistics.GetMean(attackBinomialDistribution):F2}");
-            Console.WriteLine($"Standard deviation: {Statistics.GetStandardDeviation(attackBinomialDistribution):F2}");
-            Console.WriteLine($"Median: {Statistics.GetMedian(attackBinomialDistribution)}");
-            Console.WriteLine($"Mode: {Statistics.GetMode(attackBinomialDistribution)}");
+            Console.WriteLine($"Probability of any one hit succeeding: {CombatMath.GetAttackerHitProbability(attacker) * 100:F2}%");
             Console.WriteLine("");
 
             // Determine the upper cumulative distribution of success
             // Print the distribution and stats
-            Console.WriteLine($"Upper cumulative distribution for {attacker.NumberOfAttacks} dice rolling {attacker.HitSkill}+:");
+            Console.WriteLine($"Upper cumulative distribution:");
             var attackUpperCumulativeDistribution = CombatMath.GetAttackerHitUpperCumulativeDistribution(attacker);
             Console.WriteLine(attackUpperCumulativeDistribution);
+            Console.WriteLine($"Mean: {CombatMath.GetMeanAttackerHits(attacker):F2}");
+            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationAttackerHits(attacker):F2}");
             Console.WriteLine("");
         }
 

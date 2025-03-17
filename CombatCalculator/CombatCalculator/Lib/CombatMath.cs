@@ -28,6 +28,26 @@ namespace CombatCalculator.Lib
         }
 
         /// <summary>
+        /// Returns the mean of the attacker's hit roll distribution.
+        /// </summary>
+        /// <param name="attacker"></param>
+        /// <returns></returns>
+        public static double GetMeanAttackerHits(AttackerDTO attacker)
+        {
+            return Statistics.GetMean(attacker.NumberOfAttacks, GetAttackerHitProbability(attacker));
+        }
+
+        /// <summary>
+        /// Returns the standard deviation of the attacker's hit roll distribution.
+        /// </summary>
+        /// <param name="attacker"></param>
+        /// <returns></returns>
+        public static double GetStandardDeviationAttackerHits(AttackerDTO attacker) 
+        {
+            return Statistics.GetStandardDeviation(attacker.NumberOfAttacks, GetAttackerHitProbability(attacker));
+        }
+
+        /// <summary>
         /// Returns the upper cumulative distribution of the attacker's hit roll.
         /// </summary>
         /// <returns></returns>
