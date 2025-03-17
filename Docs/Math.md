@@ -293,7 +293,7 @@ $$SD[B(20, 0.6666] = \sqrt{(20)(0.6666)(1 - 0.6666)} = 2.11$$
 
 The cumulative distribution can be calculated to determine the likelihood of rolling $k$ successes for all values of $k$ from $0$ to $n$:
 
-| Successes | $p$ |
+| Successes | $P(X >= k)$ |
 |----------|----------|
 | 0 | 100.00% |
 | 1 | 100.00% |
