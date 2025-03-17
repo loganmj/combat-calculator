@@ -37,8 +37,8 @@ Given a max number of possible results, and a success threshold value, the proba
 $$p(X \geq k) = \frac{(n - (k - 1))}{n}$$
 
 where 
-- $n$ is the total number of possible results.
-- $k$ is the success threshold value.
+- $n$ is the total number of possible results
+- $k$ is the success threshold value
 
 ## Probability of Failure in a Single Trial
 Probability of failure is defined as the probability that success will *not* occur, and is denoted by $q$.
@@ -62,8 +62,8 @@ Given a max number of possible results, and a success threshold value, the proba
 $$q(X \geq k) = 1 - p(X \geq k) = \left(1 - \left(\frac{(n - (k - 1))}{n}\right)\right)$$
 
 where 
-- $n$ is the total number of possible results.
-- $k$ is the success threshold value.
+- $n$ is the total number of possible results
+- $k$ is the success threshold value
 
 ## Probability of Success for Common Cases
 In Warhammer 40k, success cases are commonly set as 2+, 3+, 4+, 5+, or 6+ (Rolling a 1 is almost always considered a failure). Each of these success cases on a single die have the following probabilities:
@@ -428,8 +428,13 @@ The updated cumulative probability distribution would be then calculated by plug
 
 ## Factoring in Armor Pierce
 In Warhammer 40k, weapons have an Armor Pierce stat. The Armor Pierce stat of a weapon is applied as a direct debuff to the defender's save stat. For example, if the defender has an armor save of 3+ and the attacker's weapon 
-has an Armor Pierce of -1, then the defender's save is treated as a 4+ instead.
+has an Armor Pierce of 1, then the defender's save is treated as a 4+ instead.
 
 The probability of a successful save roll, then must factor in the attacker's Armor Pierce stat as follows:
 
-$$p(save) = $$
+$$p(X \geq k) = \frac{(n - ((k + j) - 1))}{n}$$
+
+where 
+- $n$ is the total number of possible results
+- $k$ is the success threshold value
+- $j$ is the attacker's weapon Armor Pierce stat
