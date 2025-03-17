@@ -15,7 +15,7 @@
         /// <summary>
         /// The number of attacks the attacker is making.
         /// </summary>
-        public int NumberOfAttacks { get; set; }
+        public int WeaponAttacks { get; set; }
 
         /// <summary>
         /// The ballistic/weapon skill threshold value of the attacker.

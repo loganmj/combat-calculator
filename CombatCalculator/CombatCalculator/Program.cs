@@ -48,7 +48,7 @@ namespace CombatCalculator
         /// <param name="hitStat"></param>
         private static void ProjectHitRoll(AttackerDTO attacker)
         {
-            Console.WriteLine($"Attacker is rolling {attacker.NumberOfAttacks} hits, succeeding on a roll of {attacker.HitSkill}+ ...");
+            Console.WriteLine($"Attacker is rolling {CombatMath.GetNumberOfAttacks(attacker)} hits, succeeding on a roll of {attacker.HitSkill}+ ...");
 
             // Get the probability of success with any one hit roll.
             Console.WriteLine($"Probability of any one hit succeeding: {CombatMath.GetHitProbability(attacker) * 100:F2}%");
@@ -69,22 +69,23 @@ namespace CombatCalculator
         /// Simulates rolling the wound roll of an attack.
         /// </summary>
         /// <param name="attacker"></param>
-        private static void ProjectWoundRoll(AttackerDTO attacker)
+        private static void ProjectWoundRoll(AttackerDTO attacker, DefenderDTO defender)
         {
-            Console.WriteLine($"Projecting wound roll for an attack with {attacker.NumberOfAttacks} hits, a hit skill of {attacker.HitSkill}+, and a successful wound roll being 4+");
+            Console.WriteLine($"Projecting wound roll for an attack with {attacker.WeaponAttacks} hits, a hit skill of {attacker.HitSkill}+, "
+                              + $"and a successful wound roll being {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+");
 
             // Get the probability of success with any one wound roll.
-            Console.WriteLine($"Probability of any one wound succeeding: {0.5 * 100:F2}%");
+            Console.WriteLine($"Probability of any one wound succeeding: {CombatMath.GetWoundProbability(attacker, defender) * 100:F2}%");
             Console.WriteLine("");
 
             // Determine the upper cumulative distribution of successful wounds
             Console.WriteLine($"Upper cumulative distribution of wounds:");
-            var woundRollsUpperCumulativeDistribution = CombatMath.GetWoundUpperCumulativeDistribution(attacker);
+            var woundRollsUpperCumulativeDistribution = CombatMath.GetWoundUpperCumulativeDistribution(attacker, defender);
 
             // Print the distribution and stats
             Console.WriteLine(woundRollsUpperCumulativeDistribution);
-            Console.WriteLine($"Mean: {CombatMath.GetMeanWoundRolls(attacker):F2}");
-            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationWoundRolls(attacker):F2}");
+            Console.WriteLine($"Mean: {CombatMath.GetMeanWoundRolls(attacker, defender):F2}");
+            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationWoundRolls(attacker, defender):F2}");
             Console.WriteLine("");
         }
 
@@ -111,22 +112,38 @@ namespace CombatCalculator
                 var totalNumberOfAttacks = numberOfAttackingModels * weaponAttacksStat;
                 Console.WriteLine($"Attacker is rolling {totalNumberOfAttacks} hit dice.\n");
 
-                Console.WriteLine("Enter attacker's Weapon/Ballistic Skill (1-6):");
+                Console.WriteLine("Enter attacker's Weapon/Ballistic Skill stat (1-6):");
                 var attackerHitSkill = GetDieSuccessThresholdFromUser();
                 Console.WriteLine($"Attacker hits on {attackerHitSkill}s.\n");
+
+                Console.WriteLine("Enter attacker's weapon Strength stat:");
+                var attackerWeaponStrength = GetIntegerFromUser();
+                Console.WriteLine($"Attacker's weapon strength is {attackerWeaponStrength}.\n");
+
+                Console.WriteLine("Enter defender's Toughness stat:");
+                var defenderToughness = GetIntegerFromUser();
+                Console.WriteLine($"Defender's toughness is {defenderToughness}.\n");
 
                 // Create attacker object
                 var attacker = new AttackerDTO
                 {
-                    NumberOfAttacks = totalNumberOfAttacks,
-                    HitSkill = attackerHitSkill
+                    NumberOfModels = numberOfAttackingModels,
+                    WeaponAttacks = weaponAttacksStat,
+                    HitSkill = attackerHitSkill,
+                    WeaponStrength = attackerWeaponStrength
+                };
+
+                // Create defender object
+                var defender = new DefenderDTO 
+                {
+                    Toughness = defenderToughness
                 };
 
                 // Perform hit roll
                 ProjectHitRoll(attacker);
 
                 // Perform wound roll
-                ProjectWoundRoll(attacker);
+                ProjectWoundRoll(attacker, defender);
             }
         }
 
