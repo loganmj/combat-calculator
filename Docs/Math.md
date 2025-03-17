@@ -208,7 +208,7 @@ Binomial distribution of an attack roll of 10 dice, hitting on 3+:
 ## Mean and Standard Deviation
 Calculating the mean of the binomial data will determine the expected average number of successes to expect from an attack roll. The mean value can be calculated as:
 
-$$E[B(n,p)] = np$$
+$$Mean[B(n,p)] = np$$
 
 where
 - $n$ is the number of trials
@@ -216,7 +216,7 @@ where
 
 Calculating the standard deviation of the binomial data will determine the expected number of successes above or below the average value due to normal variance. Standard deviation can be calculated as:
 
-$$\sqrt{np(1-p)}$$
+$$SD[B(n,p)] = \sqrt{np(1-p)}$$
 
 where
 - $n$ is the number of trials
