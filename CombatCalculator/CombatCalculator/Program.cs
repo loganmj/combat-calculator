@@ -58,8 +58,8 @@ namespace CombatCalculator
             Console.WriteLine(attackBinomialDistribution);
             Console.WriteLine($"Mean: {Statistics.GetMean(attackBinomialDistribution):F2}");
             Console.WriteLine($"Standard deviation: {Statistics.GetStandardDeviation(attackBinomialDistribution):F2}");
-            Console.WriteLine($"Median: {Statistics.GetMedian(attackBinomialDistribution):F2}");
-            Console.WriteLine($"Mode: {Statistics.GetMode(attackBinomialDistribution):F2}");
+            Console.WriteLine($"Median: {Statistics.GetMedian(attackBinomialDistribution)}");
+            Console.WriteLine($"Mode: {Statistics.GetMode(attackBinomialDistribution)}");
             Console.WriteLine("");
 
             // Determine the upper cumulative distribution of success

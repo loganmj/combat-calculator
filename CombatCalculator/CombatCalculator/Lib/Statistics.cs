@@ -187,7 +187,7 @@ namespace CombatCalculator.Lib
 
             foreach (var result in distribution)
             {
-                mean += result.Key * result.Value;
+                mean += result.Key * (double)result.Value;
             }
 
             return mean;
@@ -198,7 +198,7 @@ namespace CombatCalculator.Lib
         /// </summary>
         /// <param name="distribution"></param>
         /// <returns></returns>
-        public static double GetMedian(this ProbabilityDistribution distribution)
+        public static int GetMedian(this ProbabilityDistribution distribution)
         {
             double cumulativeProbability = 0.5;
 
