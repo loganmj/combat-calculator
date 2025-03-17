@@ -370,4 +370,42 @@ The cumulative probability distribution would be then calculated by plugging $P(
 | 19 | 0.00% |
 | 20 | 0.00% |
 
+## Predicting the Results of the Save roll
+In Warhammer 40k, after the hit and wound rolls are finished, the opponent must make a save roll, to determine if they are able to perform armor saves against the successful wound rolls. To include the defender's save 
+roll in the projection, it is necessary to calculate the probability that the defender *fails* their save roll, making the compound calculation:
 
+$$P(\text{attack}) = (p_\text{hit})(p_\text{wound})(q_\text{save}) = (p_\text{hit})(p_\text{wound})(1 - p_\text{save})$$
+
+The defender's Armor Save stat is expressed as a die roll threshold, like the attacker's Ballistic/Weapon Skill stat. This threshold can be used to determine the save probability and plug it into the probability calculation.
+Continuing the example from the previous section, the Save stat of the Space Marine Intercessor unit is 3+. This means that the probability of any one attack succeeding the hit and wound rolls, and the opponent failing their
+save roll is calculated as follows:
+
+$$P(\text{attack}) = (p_\text{hit})(p_\text{wound})(q_\text{save}) = (p_\text{hit})(p_\text{wound})(1 - p_\text{save}) = (0.6666)(0.5)(1 - 0.6666) = 0.1111$$
+
+or 11.11%.
+
+The updated cumulative probability distribution would be then calculated by plugging $P(\text{hit and wound, and failed save})$ in for $p$:
+
+| Successes | $P(X \geq k)$ |
+|----------|----------|
+| 0 | 100.00% |
+| 1 | 99.97% |
+| 2 | 99.67% |
+| 3 | 98.24% |
+| 4 | 93.96% |
+| 5 | 84.85% |
+| 6 | 70.28% |
+| 7 | 52.07% |
+| 8 | 33.85% |
+| 9 | 19.05% |
+| 10 | 9.19% |
+| 11 | 3.76% |
+| 12 | 1.30% |
+| 13 | 0.37% |
+| 14 | 0.09% |
+| 15 | 0.02% |
+| 16 | 0.00% |
+| 17 | 0.00% |
+| 18 | 0.00% |
+| 19 | 0.00% |
+| 20 | 0.00% |
