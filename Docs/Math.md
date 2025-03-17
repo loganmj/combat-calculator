@@ -331,7 +331,7 @@ attacker's weapon and the Toughness stat of the defender. The table below descri
 
 The probability of an attack succeeding both the hit and the wound roll would be calculated by multiplying together the probability of the hit success and the probability of the wound roll, like so:
 
-$$P(\text{hit and wound}) = (p_hit)(p_wound)$$
+$$P(\text{hit and wound}) = (p_\text{hit})(p_\text{wound})$$
 
 For example, if a unit of 10 Space Marine Intercessors fire their Bolt Rifles into another unit of 10 Space Marine Intercessors, the probability of succeeding a hit and wound roll for any one die would be calculated as follows:
 
