@@ -327,6 +327,49 @@ attacker's weapon and the Toughness stat of the defender. The table below descri
 | $1.0<r<2.0$ | 3+ | The attacker's weapon Strength is greater than, but less than double, the defender's Toughness. |
 | $r = 1.0$ | 4+ | The attacker's weapon Strength is equal to the defender's Toughness. |
 | $0.5 < r < 1.0$ | 5+ | The attacker's weapon Strength is less than, but more than half, the defender's Toughness. |
-| $r \leq 0.5$ | 6+ | The attacker's weapon Strength is less than or equal to half the defender's toughness |
+| $r \leq 0.5$ | 6+ | The attacker's weapon Strength is less than or equal to half the defender's Toughness. |
+
+The probability of an attack succeeding both the hit and the wound roll would be calculated by multiplying together the probability of the hit success and the probability of the wound roll, like so:
+
+$$P(\text{hit and wound}) = (p_hit)(p_wound)$$
+
+For example, if a unit of 10 Space Marine Intercessors fire their Bolt Rifles into another unit of 10 Space Marine Intercessors, the probability of succeeding a hit and wound roll for any one die would be calculated as follows:
+
+Parameters:
+- Bolt Rifle Weapon Skill: 3+
+- Bolt Rifle Strength: 4
+- Intercessor Toughness: 4
+
+Wound Threshold = 4+
+
+$$P(\text{hit and wound}) = (p_hit)(p_wound) = (0.6666)(0.5) = 0.3333$$
+
+or 33.33%
+
+The cumulative probability distribution would be then calculated by plugging $P(\text{hit and wound})$ in for $p$ in the equation:
+
+| Successes | $P(X \geq k)$ |
+|----------|----------|
+| 0 | 100.00% |
+| 1 | 99.97% |
+| 2 | 99.67% |
+| 3 | 98.24% |
+| 4 | 93.96% |
+| 5 | 84.85% |
+| 6 | 70.28% |
+| 7 | 52.07% |
+| 8 | 33.85% |
+| 9 | 19.05% |
+| 10 | 9.19% |
+| 11 | 3.76% |
+| 12 | 1.30% |
+| 13 | 0.37% |
+| 14 | 0.09% |
+| 15 | 0.02% |
+| 16 | 0.00% |
+| 17 | 0.00% |
+| 18 | 0.00% |
+| 19 | 0.00% |
+| 20 | 0.00% |
 
 

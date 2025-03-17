@@ -50,35 +50,34 @@ namespace CombatCalculator.Lib
         /// <returns></returns>
         public static int GetWoundSuccessThreshold(AttackerDTO attacker, DefenderDTO defender)
         {
-            // return defender.Toughness <= attacker.WeaponStrength ? 2 : (defender.Toughness - attacker.WeaponStrength + 1);
-            var successQuotient = attacker.WeaponStrength / (double)defender.Toughness;
+            var strength = attacker.WeaponStrength;
+            var toughness = defender.Toughness;
 
-            // If the attacker's strength is at least double the defender's toughness, the success threshold is 2+
-            if (successQuotient >= 2)
+            // The attacker's weapon Strength is greater than or equal to double the defender's Toughness.
+            if (strength >= 2 * toughness)
             {
                 return 2;
             }
 
-            // If the attacker's weapon Strength is greater than, but less than double, the defender's Toughness, the success threshold is 3+
-            else if (1 < successQuotient && successQuotient < 2)
+            // The attacker's weapon Strength is greater than, but less than double, the defender's Toughness.
+            else if (strength > toughness)
             {
                 return 3;
             }
 
-
-            // If the attacker's strength is equal to the defender's toughness, the success threshold is 4+
-            else if (successQuotient == 1)
+            // The attacker's weapon Strength is equal to the defender's Toughness.
+            else if (strength == toughness)
             {
                 return 4;
             }
 
-            // if the attacker's strength is less than the defender's toughness, but more than half, the success threshold is 5+
-            else if (0.5 < successQuotient && successQuotient < 1)
+            // The attacker's weapon Strength is less than, but more than half, the defender's Toughness.
+            else if (strength > toughness / 2)
             {
                 return 5;
             }
 
-            // If the attacker's strength is half or less than the defender's toughness, the success threshold is 6+
+            // The attacker's weapon Strength is less than or equal to half the defender's Toughness.
             else
             {
                 return 6;
@@ -86,14 +85,14 @@ namespace CombatCalculator.Lib
         }
 
         /// <summary>
-        /// Returns the probability of wounding the defender with a single attack.
+        /// Returns the probability of succeeding in both a hit and a wound roll for any one attack.
         /// </summary>
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
         public static double GetWoundProbability(AttackerDTO attacker, DefenderDTO defender) 
         {
-            return Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(GetWoundSuccessThreshold(attacker, defender)));
+            return GetHitProbability(attacker) * Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(GetWoundSuccessThreshold(attacker, defender)));
         }
 
         /// <summary>
