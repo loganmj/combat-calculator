@@ -340,8 +340,6 @@ Parameters:
 - Bolt Rifle Strength: 4
 - Intercessor Toughness: 4
 
-Wound Threshold = 4+
-
 $$P(\text{hit and wound}) = (p_hit)(p_wound) = (0.6666)(0.5) = 0.3333$$
 
 or 33.33%
