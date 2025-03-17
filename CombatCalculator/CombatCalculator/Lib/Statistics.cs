@@ -179,6 +179,17 @@ namespace CombatCalculator.Lib
         /// <summary>
         /// Calculates the mean value of a probability distribution.
         /// </summary>
+        /// <param name="numberOfTrials"></param>
+        /// <param name="probability"></param>
+        /// <returns></returns>
+        public static double GetMean(int numberOfTrials, double probability)
+        {
+            return numberOfTrials * probability;
+        }
+
+        /// <summary>
+        /// Calculates the mean value of a probability distribution.
+        /// </summary>
         /// <param name="distribution"></param>
         /// <returns></returns>
         public static double GetMean(this ProbabilityDistribution distribution)

@@ -3,7 +3,7 @@
     /// <summary>
     /// A data transfer object representing the attacker in a combat scenario.
     /// </summary>
-    internal class AttackerDTO
+    public class AttackerDTO
     {
         #region Properties
 
