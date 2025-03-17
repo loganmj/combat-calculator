@@ -185,7 +185,7 @@ namespace CombatCalculator.Lib
         /// <returns></returns>
         public static double GetFailedSaveProbability(AttackerDTO attacker, DefenderDTO defender)
         {
-            return GetWoundProbability(attacker, defender) * (1 - Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(defender.ArmorSave)));
+            return GetWoundProbability(attacker, defender) * (1 - Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(defender.ArmorSave) - attacker.WeaponArmorPierce));
         }
 
         /// <summary>

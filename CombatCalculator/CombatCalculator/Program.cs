@@ -15,9 +15,9 @@ namespace CombatCalculator
         /// Retrieves the number of dice to roll from the user.
         /// </summary>
         /// <returns>The number of dice to roll.</returns>
-        private static int GetIntegerFromUser()
+        private static int GetPositiveIntegerFromUser()
         {
-            if (!int.TryParse(Console.ReadLine(), out int userInt) || userInt < 1)
+            if (!int.TryParse(Console.ReadLine(), out int userInt) || userInt < 0)
             {
                 Console.WriteLine($"Invalid value, defaulting to 1.");
                 userInt = 1;
@@ -96,9 +96,9 @@ namespace CombatCalculator
         /// <param name="defender"></param>
         private static void CalculateArmorSaveRoll(AttackerDTO attacker, DefenderDTO defender)
         {
-            Console.WriteLine($"Projecting failed save rolls for an attack with {attacker.WeaponAttacks} hits, a hit skill of {{attacker.HitSkill}}+, "
+            Console.WriteLine($"Projecting failed save rolls for an attack with {attacker.WeaponAttacks} hits, a hit skill of {attacker.HitSkill}+, "
                               + $"a successful wound roll being {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+, "
-                              + $"and a successful armor save roll being {defender.ArmorSave}+");
+                              + $"a successful armor save roll being {defender.ArmorSave + attacker.WeaponArmorPierce}+ (adjusted for armor pierce),");
 
             // Get the probability of failure with any one armor save roll.
             Console.WriteLine($"Probability of any one armor save failing: {CombatMath.GetFailedSaveProbability(attacker, defender) * 100:F2}%");
@@ -128,11 +128,11 @@ namespace CombatCalculator
             {
                 // Get data from user
                 Console.WriteLine("Enter number of attacking models (default 1):");
-                var numberOfAttackingModels = GetIntegerFromUser();
+                var numberOfAttackingModels = GetPositiveIntegerFromUser();
                 Console.WriteLine($"Attacking with {numberOfAttackingModels} models.\n");
 
                 Console.WriteLine("Enter attacker's weapon Attacks stat:");
-                var weaponAttacksStat = GetIntegerFromUser();
+                var weaponAttacksStat = GetPositiveIntegerFromUser();
                 Console.WriteLine($"Attacks stat: {weaponAttacksStat}.");
 
                 var totalNumberOfAttacks = numberOfAttackingModels * weaponAttacksStat;
@@ -143,11 +143,15 @@ namespace CombatCalculator
                 Console.WriteLine($"Attacker hits on {attackerHitSkill}s.\n");
 
                 Console.WriteLine("Enter attacker's weapon Strength stat:");
-                var attackerWeaponStrength = GetIntegerFromUser();
-                Console.WriteLine($"Attacker's weapon strength is {attackerWeaponStrength}.\n");
+                var attackerWeaponStrength = GetPositiveIntegerFromUser();
+                Console.WriteLine($"Attacker's weapon Strength is {attackerWeaponStrength}.\n");
+
+                Console.WriteLine("Enter attacker's weapon Armor Pierce stat:");
+                var attackerWeaponArmorPierce = GetPositiveIntegerFromUser();
+                Console.WriteLine($"Attacker's weapon Armor Pierce is -{attackerWeaponArmorPierce}.\n");
 
                 Console.WriteLine("Enter defender's Toughness stat:");
-                var defenderToughness = GetIntegerFromUser();
+                var defenderToughness = GetPositiveIntegerFromUser();
                 Console.WriteLine($"Defender's toughness is {defenderToughness}.\n");
 
                 Console.WriteLine("Enter defender's Armor Save stat (1-6):");
@@ -160,7 +164,8 @@ namespace CombatCalculator
                     NumberOfModels = numberOfAttackingModels,
                     WeaponAttacks = weaponAttacksStat,
                     HitSkill = attackerHitSkill,
-                    WeaponStrength = attackerWeaponStrength
+                    WeaponStrength = attackerWeaponStrength,
+                    WeaponArmorPierce = attackerWeaponArmorPierce
                 };
 
                 // Create defender object

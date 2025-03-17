@@ -34,7 +34,7 @@ Or 50%. This makes sense, as half of the results on the dice are considered a su
 
 Given a max number of possible results, and a success threshold value, the probability of getting a result within the success threshold can be calculated as:
 
-$$p(X \geq k) = \frac{(n - (k - 1))}{n}$$
+$$p(X \geq k) = \frac{n - (k - 1)}{n}$$
 
 where 
 - $n$ is the total number of possible results
@@ -59,7 +59,7 @@ or 33.33%
 
 Given a max number of possible results, and a success threshold value, the probability of getting a result below the success threshold can be calculated as:
 
-$$q(X \geq k) = 1 - p(X \geq k) = \left(1 - \left(\frac{(n - (k - 1))}{n}\right)\right)$$
+$$q(X \geq k) = 1 - p(X \geq k) = \left(1 - \left(\frac{n - (k - 1)}{n}\right)\right)$$
 
 where 
 - $n$ is the total number of possible results
@@ -432,7 +432,7 @@ has an Armor Pierce of 1, then the defender's save is treated as a 4+ instead.
 
 The probability of a successful save roll, then must factor in the attacker's Armor Pierce stat as follows:
 
-$$p(X \geq k) = \frac{(n - ((k + j) - 1))}{n}$$
+$$p(X \geq k) = \frac{n - (k - 1) + j}{n}$$
 
 where 
 - $n$ is the total number of possible results
