@@ -294,7 +294,7 @@ $$SD[B(20, 0.6666] = \sqrt{(20)(0.6666)(1 - 0.6666)} = 2.11$$
 The cumulative distribution can be calculated to determine the likelihood of rolling $k$ successes for all values of $k$ from $0$ to $n$:
 
 | Successes | $P(X \geq k)$ |
-|----------|----------|----------|
+|----------|----------|
 | 0 | 100.00% |
 | 1 | 100.00% |
 | 2 | 100.00% |
@@ -322,7 +322,7 @@ In Warhammer 40k after a hit roll is made, the attacker must then make a wound r
 attacker's weapon and the Toughness stat of the defender. The table below describes this relationship:
 
 | Ratio | Wound Success | Description |
-|----------|----------|
+|----------|----------|----------|
 | $r /geq 2.0$ | 2+ | The attacker's weapon Strength is greater than or equal to double the defender's Toughness. |
 | $1.0<r<2.0$ | 3+ | The attacker's weapon Strength is greater than, but less than double, the defender's Toughness. |
 | r = 1.0 | 4+ | The attacker's weapon Strength is equal to the defender's Toughness. |
