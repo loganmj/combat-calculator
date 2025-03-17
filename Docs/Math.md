@@ -305,7 +305,7 @@ The expected mean number of successes and the standard deviation can be calculat
 
 $$Mean[B(20, 0.6666)] = (20)(0.6666) = 13.33$$
 
-$$SD[B(20, 0.6666] = \sqrt{(20)(0.6666)(1 - 0.6666)} = 2.11$$
+$$SD[B(20, 0.6666)] = \sqrt{(20)(0.6666)(1 - 0.6666)} = 2.11$$
 
 The cumulative distribution can be calculated to determine the likelihood of rolling $k$ successes for all values of $k$ from $0$ to $n$:
 
