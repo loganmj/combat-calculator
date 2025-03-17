@@ -89,13 +89,39 @@ namespace CombatCalculator
             Console.WriteLine("");
         }
 
+        /// <summary>
+        /// Simulates rolling the armor save roll of an attack.
+        /// </summary>
+        /// <param name="attacker"></param>
+        /// <param name="defender"></param>
+        private static void CalculateArmorSaveRoll(AttackerDTO attacker, DefenderDTO defender)
+        {
+            Console.WriteLine($"Projecting failed save rolls for an attack with {attacker.WeaponAttacks} hits, a hit skill of {{attacker.HitSkill}}+, "
+                              + $"a successful wound roll being {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+, "
+                              + $"and a successful armor save roll being {defender.ArmorSave}+");
+
+            // Get the probability of failure with any one armor save roll.
+            Console.WriteLine($"Probability of any one armor save failing: {CombatMath.GetFailedSaveProbability(attacker, defender) * 100:F2}%");
+            Console.WriteLine("");
+
+            // Determine the upper cumulative distribution of successful wounds
+            Console.WriteLine($"Upper cumulative distribution of failed saves:");
+            var failedSaveRollsUpperCumulativeDistribution = CombatMath.GetFailedSaveUpperCumulativeDistribution(attacker, defender);
+
+            // Print the distribution and stats
+            Console.WriteLine(failedSaveRollsUpperCumulativeDistribution);
+            Console.WriteLine($"Mean: {CombatMath.GetMeanFailedSaveRolls(attacker, defender):F2}");
+            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationFailedSaveRolls(attacker, defender):F2}");
+            Console.WriteLine("");
+        }
+
         #endregion
 
-        #region Public Methods
+            #region Public Methods
 
-        /// <summary>
-        /// Main method performs combat calculation and outputs percent liklihood of success.
-        /// </summary>
+            /// <summary>
+            /// Main method performs combat calculation and outputs percent liklihood of success.
+            /// </summary>
         public static void Main()
         {
             while (true)
@@ -124,6 +150,10 @@ namespace CombatCalculator
                 var defenderToughness = GetIntegerFromUser();
                 Console.WriteLine($"Defender's toughness is {defenderToughness}.\n");
 
+                Console.WriteLine("Enter defender's Armor Save stat (1-6):");
+                var defenderArmorSave = GetDieSuccessThresholdFromUser();
+                Console.WriteLine($"Defender's armor save is {defenderArmorSave}.\n");
+
                 // Create attacker object
                 var attacker = new AttackerDTO
                 {
@@ -136,7 +166,8 @@ namespace CombatCalculator
                 // Create defender object
                 var defender = new DefenderDTO 
                 {
-                    Toughness = defenderToughness
+                    Toughness = defenderToughness,
+                    ArmorSave = defenderArmorSave
                 };
 
                 // Perform hit roll
@@ -144,6 +175,9 @@ namespace CombatCalculator
 
                 // Perform wound roll
                 CalculateWoundRoll(attacker, defender);
+
+                // Perform save roll
+                CalculateArmorSaveRoll(attacker, defender);
             }
         }
 

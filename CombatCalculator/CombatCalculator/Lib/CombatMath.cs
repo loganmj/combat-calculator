@@ -177,6 +177,62 @@ namespace CombatCalculator.Lib
             return Statistics.UpperCumulativeDistribution(GetNumberOfAttacks(attacker), GetWoundProbability(attacker, defender));
         }
 
+        /// <summary>
+        /// Returns the probability of the attacker passing their hit and wound roll, and the defender failing their save, for any one attack.
+        /// </summary>
+        /// <param name="attacker"></param>
+        /// <param name="defender"></param>
+        /// <returns></returns>
+        public static double GetFailedSaveProbability(AttackerDTO attacker, DefenderDTO defender)
+        {
+            return GetWoundProbability(attacker, defender) * (1 - Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(defender.ArmorSave)));
+        }
+
+        /// <summary>
+        /// Returns a binomial distribution of rolls where the hit and wound have succeeded, and the opponent failed their save.
+        /// </summary>
+        /// <param name="attacker"></param>
+        /// <param name="defender"></param>
+        /// <returns></returns>
+        public static ProbabilityDistribution GetFailSaveBinomialDistribution(AttackerDTO attacker, DefenderDTO defender)
+        {
+            return Statistics.BinomialDistribution(GetNumberOfAttacks(attacker), GetFailedSaveProbability(attacker, defender));
+        }
+
+        /// <summary>
+        /// Returns the mean of the failed save roll distribution.
+        /// </summary>
+        /// <param name="attacker"></param>
+        /// <param name="defender"></param>
+        /// <returns></returns>
+        public static double GetMeanFailedSaveRolls(AttackerDTO attacker, DefenderDTO defender)
+        {
+            return Statistics.GetMean(GetNumberOfAttacks(attacker), GetFailedSaveProbability(attacker, defender));
+        }
+
+        /// <summary>
+        /// Returns the standard deviation of the failed save roll distribution.
+        /// </summary>
+        /// <param name="attacker"></param>
+        /// <param name="defender"></param>
+        /// <returns></returns>
+        public static double GetStandardDeviationFailedSaveRolls(AttackerDTO attacker, DefenderDTO defender)
+        {
+            return Statistics.GetStandardDeviation(GetNumberOfAttacks(attacker), GetFailedSaveProbability(attacker, defender));
+        }
+
+        /// <summary>
+        /// Returns the upper cumulative distribution of the failed save roll.
+        /// </summary>
+        /// <param name="attacker"></param>
+        /// <param name="defender"></param>
+        /// <returns></returns>
+        public static ProbabilityDistribution GetFailedSaveUpperCumulativeDistribution(AttackerDTO attacker, DefenderDTO defender)
+        {
+            return Statistics.UpperCumulativeDistribution(GetNumberOfAttacks(attacker), GetFailedSaveProbability(attacker, defender));
+        }
+
+
         #endregion
     }
 }
