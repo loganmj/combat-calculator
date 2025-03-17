@@ -1,4 +1,6 @@
-﻿namespace CombatCalculator.Lib
+﻿using CombatCalculator.Data;
+
+namespace CombatCalculator.Lib
 {
     /// <summary>
     /// A static class that provides statstical math functions.
@@ -187,7 +189,7 @@
             {
                 mean += result.Key * result.Value;
             }
-            
+
             return mean;
         }
 

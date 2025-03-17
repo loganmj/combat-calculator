@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace CombatCalculator
+namespace CombatCalculator.Data
 {
     /// <summary>
     /// Represents a discrete probability distribution of Bernoulli trial data, represented as a dictionary data map.
@@ -18,7 +18,7 @@ namespace CombatCalculator
 
             foreach (var result in this)
             {
-                stringBuilder.AppendLine($"P({result.Key}) = {(result.Value * 100):F2}%");
+                stringBuilder.AppendLine($"P({result.Key}) = {result.Value * 100:F2}%");
             }
 
             return stringBuilder.ToString();

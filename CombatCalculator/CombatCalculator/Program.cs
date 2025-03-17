@@ -1,4 +1,5 @@
-﻿using CombatCalculator.Lib;
+﻿using CombatCalculator.Data;
+using CombatCalculator.Lib;
 
 namespace CombatCalculator
 {
@@ -42,18 +43,18 @@ namespace CombatCalculator
         /// </summary>
         /// <param name="numberOfDice"></param>
         /// <param name="hitStat"></param>
-        private static void ProjectHitRoll(CombatProcess process)
+        private static void ProjectHitRoll(AttackerDTO attacker)
         {
-            Console.WriteLine($"Rolling {process.NumberOfHitDice} dice, succeeding on a roll of {process.AttackerHitSkill}+ ...");
+            Console.WriteLine($"Attacker is making {attacker.NumberOfAttacks} attacks, succeeding on a roll of {attacker.HitSkill}+ ...");
 
             // Get the probability of success with one die
-            Console.WriteLine($"Probability of succeeding per die: {process.GetAttackerHitProbability()*100:F2}%");
+            Console.WriteLine($"Probability of any one attack succeeding: {CombatMath.GetAttackerHitProbability(attacker.NumberOfAttacks) * 100:F2}%");
             Console.WriteLine("");
 
             // Determine binomial distribution of success with all dice
             // Print the distribution and stats
-            Console.WriteLine($"Binomial distribution for {process.NumberOfHitDice} dice rolling {process.AttackerHitSkill}+:");
-            var attackBinomialDistribution = process.GetAttackerHitBinomialDistribution();
+            Console.WriteLine($"Binomial distribution for {attacker.NumberOfAttacks} dice rolling {attacker.HitSkill}+:");
+            var attackBinomialDistribution = CombatMath.GetAttackerHitBinomialDistribution(attacker.NumberOfAttacks, attacker.HitSkill);
             Console.WriteLine(attackBinomialDistribution);
             Console.WriteLine($"Mean: {Statistics.GetMean(attackBinomialDistribution):F2}");
             Console.WriteLine($"Standard deviation: {Statistics.GetStandardDeviation(attackBinomialDistribution):F2}");
@@ -63,8 +64,8 @@ namespace CombatCalculator
 
             // Determine the upper cumulative distribution of success
             // Print the distribution and stats
-            Console.WriteLine($"Upper cumulative distribution for {process.NumberOfHitDice} dice rolling {process.AttackerHitSkill}+:");
-            var attackUpperCumulativeDistribution = process.GetAttackerHitUpperCumulativeDistribution();
+            Console.WriteLine($"Upper cumulative distribution for {attacker.NumberOfAttacks} dice rolling {attacker.HitSkill}+:");
+            var attackUpperCumulativeDistribution = CombatMath.GetAttackerHitUpperCumulativeDistribution(attacker.NumberOfAttacks, attacker.HitSkill);
             Console.WriteLine(attackUpperCumulativeDistribution);
             Console.WriteLine("");
         }
@@ -89,10 +90,15 @@ namespace CombatCalculator
                 var attackerHitValue = GetSuccessThresholdFromUser();
                 Console.WriteLine($"Attacker hits on {attackerHitValue}s.\n");
 
-                var combatProcess = new CombatProcess(numberOfHitDice, attackerHitValue);
+                // Create attacker object
+                var attacker = new AttackerDTO
+                {
+                    NumberOfAttacks = numberOfHitDice,
+                    HitSkill = attackerHitValue
+                };
 
                 // Perform hit roll
-                ProjectHitRoll(combatProcess);
+                ProjectHitRoll(attacker);
             }
         }
 
