@@ -46,7 +46,7 @@ namespace CombatCalculator
         /// </summary>
         /// <param name="numberOfDice"></param>
         /// <param name="hitStat"></param>
-        private static void ProjectHitRoll(AttackerDTO attacker)
+        private static void CalculateHitRoll(AttackerDTO attacker)
         {
             Console.WriteLine($"Attacker is rolling {CombatMath.GetNumberOfAttacks(attacker)} hits, succeeding on a roll of {attacker.HitSkill}+ ...");
 
@@ -69,7 +69,7 @@ namespace CombatCalculator
         /// Simulates rolling the wound roll of an attack.
         /// </summary>
         /// <param name="attacker"></param>
-        private static void ProjectWoundRoll(AttackerDTO attacker, DefenderDTO defender)
+        private static void CalculateWoundRoll(AttackerDTO attacker, DefenderDTO defender)
         {
             Console.WriteLine($"Projecting wound roll for an attack with {attacker.WeaponAttacks} hits, a hit skill of {attacker.HitSkill}+, "
                               + $"and a successful wound roll being {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+");
@@ -140,10 +140,10 @@ namespace CombatCalculator
                 };
 
                 // Perform hit roll
-                ProjectHitRoll(attacker);
+                CalculateHitRoll(attacker);
 
                 // Perform wound roll
-                ProjectWoundRoll(attacker, defender);
+                CalculateWoundRoll(attacker, defender);
             }
         }
 
