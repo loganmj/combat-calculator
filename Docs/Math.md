@@ -323,10 +323,10 @@ attacker's weapon and the Toughness stat of the defender. The table below descri
 
 | Ratio | Wound Success | Description |
 |----------|----------|----------|
-| $r /geq 2.0$ | 2+ | The attacker's weapon Strength is greater than or equal to double the defender's Toughness. |
+| $r \geq 2.0$ | 2+ | The attacker's weapon Strength is greater than or equal to double the defender's Toughness. |
 | $1.0<r<2.0$ | 3+ | The attacker's weapon Strength is greater than, but less than double, the defender's Toughness. |
-| r = 1.0 | 4+ | The attacker's weapon Strength is equal to the defender's Toughness. |
-| 0.5 < r < 1.0 | 5+ | The attacker's weapon Strength is less than, but more than half, the defender's Toughness. |
-| r \leq 0.5 | 6+ | The attacker's weapon Strength is less than or equal to half the defender's toughness |
+| $r = 1.0$ | 4+ | The attacker's weapon Strength is equal to the defender's Toughness. |
+| $0.5 < r < 1.0$ | 5+ | The attacker's weapon Strength is less than, but more than half, the defender's Toughness. |
+| $r \leq 0.5$ | 6+ | The attacker's weapon Strength is less than or equal to half the defender's toughness |
 
 
