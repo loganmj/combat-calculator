@@ -446,7 +446,7 @@ Terminators were attacked with a weapon that had an Armor Pierce of 3, then inst
 
 When calculating the effect of armor pierce on the save roll, the invulnerable save can be factored in as follows:
 
-$$I = \min((n - (k - 1) + j), (h))$$
+$$I = \min(n - (k - 1) + j, h)$$
 
 where
 - $I$ represents the effective save value
