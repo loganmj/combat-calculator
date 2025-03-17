@@ -205,6 +205,23 @@ Binomial distribution of an attack roll of 10 dice, hitting on 3+:
 | 9 | 8.67% |
 | 10 | 1.73% |
 
+## Mean and Standard Deviation
+Calculating the mean of the binomial data will determine the expected average number of successes to expect from an attack roll. The mean value can be calculated as:
+
+$$E[B(n,p)] = np$$
+
+where
+- $n$ is the number of trials
+- $p$ is the probability of success for a single trial
+
+Calculating the standard deviation of the binomial data will determine the expected number of successes above or below the average value due to normal variance. Standard deviation can be calculated as:
+
+$$\sqrt{np(1-p)}$$
+
+where
+- $n$ is the number of trials
+- $p$ is the probability of success for a single trial
+
 ## Binomial Sums
 Probability mass functions can be added together to form binomial sums. A binomial sum shows the combined probability of getting different amounts of successes in the trials. For example, using the table from the previous 
 section, it can be determined that the probability of getting either 5 or 6 successes is the sum of their individual probabilities:
@@ -260,3 +277,14 @@ with a success being a roll of 3+ is shown below:
 
 Notice that the data shows an average roll should always produce at least 1 success. Cumulative data can be useful for predicting whether a roll is likely to produce at least some number of successes, and can be used to help 
 make strategic decisions.
+
+## In Summary: Predicting Results of A Hit Roll
+In Warhammer 40k, the attacker makes a hit roll using $n$ dice, where a successful roll is a roll of $x$ where:
+
+- $n$ is equal to the Attacks stat of the attacker's weapon.
+- $x$ is equal to the Ballistic Skill (for ranged weapons) or Weapon Skill (for melee weapons) stat of the attacker's weapon.
+
+For example, a Space Marine Intercessor model may make an attack with a Bolt Rifle. The Bolt Rifle has an Attacks stat of 2, and a Ballistic Skill of 3+. This means that a hit roll will consist of rolling 2 dice, and 
+succeeding on a roll of 3, 4, 5, or 6.
+
+A cumulative distribution can be calculated to determine the likelihood of rolling $k$ successes for all values of $k$ from $0$ to $n$.
