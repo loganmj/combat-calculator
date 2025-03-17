@@ -278,7 +278,7 @@ with a success being a roll of 3+ is shown below:
 Notice that the data shows an average roll should always produce at least 1 success. Cumulative data can be useful for predicting whether a roll is likely to produce at least some number of successes, and can be used to help 
 make strategic decisions.
 
-## In Summary: Predicting Results of A Hit Roll
+## Predicting Results of A Hit Roll
 In Warhammer 40k, the attacker will make an attack using $x$ models, using a weapon with an Attacks stat of $y$. This requires them to makes a hit roll using $x \ast y$ dice. Success is determined by the Ballistic Skill 
 (for ranged weapons) or Weapon Skill (for melee weapons) stat of the attacker's weapon.
 
@@ -317,5 +317,7 @@ The cumulative distribution can be calculated to determine the likelihood of rol
 | 19 | 0.33% |
 | 20 | 0.03% |
 
+## Predicting Results of a Wound Roll
+In Warhammer 40k after a hit roll is made, the attacker must then make a wound roll, to determine if the hit is able to wound the defender.
 
 

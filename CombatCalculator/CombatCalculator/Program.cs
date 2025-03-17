@@ -42,7 +42,7 @@ namespace CombatCalculator
         }
 
         /// <summary>
-        /// Simulates the rolling of the given number of dice.
+        /// Simulates rolling the hit roll of an attack.
         /// </summary>
         /// <param name="numberOfDice"></param>
         /// <param name="hitStat"></param>
@@ -50,17 +50,41 @@ namespace CombatCalculator
         {
             Console.WriteLine($"Attacker is rolling {attacker.NumberOfAttacks} hits, succeeding on a roll of {attacker.HitSkill}+ ...");
 
-            // Get the probability of success with one die
-            Console.WriteLine($"Probability of any one hit succeeding: {CombatMath.GetAttackerHitProbability(attacker) * 100:F2}%");
+            // Get the probability of success with any one hit roll.
+            Console.WriteLine($"Probability of any one hit succeeding: {CombatMath.GetHitProbability(attacker) * 100:F2}%");
             Console.WriteLine("");
 
-            // Determine the upper cumulative distribution of success
+            // Determine the upper cumulative distribution of successful hits
+            Console.WriteLine($"Upper cumulative distribution of hits:");
+            var hitRollsUpperCumulativeDistribution = CombatMath.GetHitUpperCumulativeDistribution(attacker);
+
             // Print the distribution and stats
-            Console.WriteLine($"Upper cumulative distribution:");
-            var attackUpperCumulativeDistribution = CombatMath.GetAttackerHitUpperCumulativeDistribution(attacker);
-            Console.WriteLine(attackUpperCumulativeDistribution);
-            Console.WriteLine($"Mean: {CombatMath.GetMeanAttackerHits(attacker):F2}");
-            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationAttackerHits(attacker):F2}");
+            Console.WriteLine(hitRollsUpperCumulativeDistribution);
+            Console.WriteLine($"Mean: {CombatMath.GetMeanHitRolls(attacker):F2}");
+            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationHitRolls(attacker):F2}");
+            Console.WriteLine("");
+        }
+
+        /// <summary>
+        /// Simulates rolling the wound roll of an attack.
+        /// </summary>
+        /// <param name="attacker"></param>
+        private static void ProjectWoundRoll(AttackerDTO attacker)
+        {
+            Console.WriteLine($"Projecting wound roll for an attack with {attacker.NumberOfAttacks} hits, a hit skill of {attacker.HitSkill}+, and a successful wound roll being 4+");
+
+            // Get the probability of success with any one wound roll.
+            Console.WriteLine($"Probability of any one wound succeeding: {0.5 * 100:F2}%");
+            Console.WriteLine("");
+
+            // Determine the upper cumulative distribution of successful wounds
+            Console.WriteLine($"Upper cumulative distribution of wounds:");
+            var woundRollsUpperCumulativeDistribution = CombatMath.GetWoundUpperCumulativeDistribution(attacker);
+
+            // Print the distribution and stats
+            Console.WriteLine(woundRollsUpperCumulativeDistribution);
+            Console.WriteLine($"Mean: {CombatMath.GetMeanWoundRolls(attacker):F2}");
+            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationWoundRolls(attacker):F2}");
             Console.WriteLine("");
         }
 
@@ -90,7 +114,7 @@ namespace CombatCalculator
                 Console.WriteLine("Enter attacker's Weapon/Ballistic Skill (1-6):");
                 var attackerHitSkill = GetDieSuccessThresholdFromUser();
                 Console.WriteLine($"Attacker hits on {attackerHitSkill}s.\n");
-                
+
                 // Create attacker object
                 var attacker = new AttackerDTO
                 {
@@ -100,6 +124,9 @@ namespace CombatCalculator
 
                 // Perform hit roll
                 ProjectHitRoll(attacker);
+
+                // Perform wound roll
+                ProjectWoundRoll(attacker);
             }
         }
 
