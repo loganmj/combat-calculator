@@ -59,8 +59,8 @@ namespace CombatCalculator.Lib
                 return 2;
             }
 
-            // If the attacker's strength is between 1 and 2 times the defender's toughness, the success threshold is 3+
-            else if (successQuotient <2 && successQuotient > 1)
+            // If the attacker's weapon Strength is greater than, but less than double, the defender's Toughness, the success threshold is 3+
+            else if (1 < successQuotient && successQuotient < 2)
             {
                 return 3;
             }
@@ -73,7 +73,7 @@ namespace CombatCalculator.Lib
             }
 
             // if the attacker's strength is less than the defender's toughness, but more than half, the success threshold is 5+
-            else if (successQuotient < 1 && successQuotient >= 0.5)
+            else if (0.5 < successQuotient && successQuotient < 1)
             {
                 return 5;
             }

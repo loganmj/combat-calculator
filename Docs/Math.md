@@ -318,6 +318,15 @@ The cumulative distribution can be calculated to determine the likelihood of rol
 | 20 | 0.03% |
 
 ## Predicting Results of a Wound Roll
-In Warhammer 40k after a hit roll is made, the attacker must then make a wound roll, to determine if the hit is able to wound the defender.
+In Warhammer 40k after a hit roll is made, the attacker must then make a wound roll, to determine if the hit is able to wound the defender. The success threshold of the wound roll depends on the ratio of Strength of the 
+attacker's weapon and the Toughness stat of the defender. The table below describes this relationship:
+
+| Ratio | Wound Success | Description |
+|----------|----------|
+| $r /geq 2.0$ | 2+ | The attacker's weapon Strength is greater than or equal to double the defender's Toughness. |
+| $1.0<r<2.0$ | 3+ | The attacker's weapon Strength is greater than, but less than double, the defender's Toughness. |
+| r = 1.0 | 4+ | The attacker's weapon Strength is equal to the defender's Toughness. |
+| 0.5 < r < 1.0 | 5+ | The attacker's weapon Strength is less than, but more than half, the defender's Toughness. |
+| r \leq 0.5 | 6+ | The attacker's weapon Strength is less than or equal to half the defender's toughness |
 
 
