@@ -83,18 +83,18 @@ namespace CombatCalculator
             {
                 // Get data from user
                 Console.WriteLine("Enter number of hit dice to roll:");
-                var numberOfHitDice = GetNumberOfDiceFromUser();
-                Console.WriteLine($"Attacker is rolling {numberOfHitDice} hit dice.\n");
+                var numberOfAttacks = GetNumberOfDiceFromUser();
+                Console.WriteLine($"Attacker is rolling {numberOfAttacks} hit dice.\n");
 
                 Console.WriteLine("Enter a success threshold from 1 to 6:");
-                var attackerHitValue = GetSuccessThresholdFromUser();
-                Console.WriteLine($"Attacker hits on {attackerHitValue}s.\n");
-
+                var attackerHitSkill = GetSuccessThresholdFromUser();
+                Console.WriteLine($"Attacker hits on {attackerHitSkill}s.\n");
+                
                 // Create attacker object
                 var attacker = new AttackerDTO
                 {
-                    NumberOfAttacks = numberOfHitDice,
-                    HitSkill = attackerHitValue
+                    NumberOfAttacks = numberOfAttacks,
+                    HitSkill = attackerHitSkill
                 };
 
                 // Perform hit roll

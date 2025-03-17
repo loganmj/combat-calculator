@@ -229,11 +229,33 @@ namespace CombatCalculator.Lib
         /// <summary>
         /// Calculates the mode value of a probability distribution.
         /// </summary>
+        /// <param name="numberOfTrials"></param>
+        /// <param name="probability"></param>
+        /// <returns></returns>
+        public static int GetMode(int numberOfTrials, double probability)
+        {
+            return (int)Math.Round((numberOfTrials + 1) * probability);
+        }
+
+        /// <summary>
+        /// Calculates the mode value of a probability distribution.
+        /// </summary>
         /// <param name="distribution"></param>
         /// <returns></returns>
         public static int GetMode(this ProbabilityDistribution distribution)
         {
             return distribution.Aggregate((max, result) => result.Value > max.Value ? result : max).Key;
+        }
+
+        /// <summary>
+        /// Calculates the standard deviation of a probability distribution.
+        /// </summary>
+        /// <param name="numberOfTrials"></param>
+        /// <param name="probability"></param>
+        /// <returns></returns>
+        public static double GetStandardDeviation(int numberOfTrials, double probability)
+        {
+            return Math.Sqrt(numberOfTrials * probability * (1 - probability));
         }
 
         /// <summary>
