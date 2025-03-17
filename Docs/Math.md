@@ -279,12 +279,43 @@ Notice that the data shows an average roll should always produce at least 1 succ
 make strategic decisions.
 
 ## In Summary: Predicting Results of A Hit Roll
-In Warhammer 40k, the attacker makes a hit roll using $n$ dice, where a successful roll is a roll of $x$ where:
+In Warhammer 40k, the attacker will make an attack using $x$ models, using a weapon with an Attacks stat of $y$. This requires them to makes a hit roll using $x \ast y$ dice. Success is determined by the Ballistic Skill 
+(for ranged weapons) or Weapon Skill (for melee weapons) stat of the attacker's weapon.
 
-- $n$ is equal to the Attacks stat of the attacker's weapon.
-- $x$ is equal to the Ballistic Skill (for ranged weapons) or Weapon Skill (for melee weapons) stat of the attacker's weapon.
+For example, a Space Marine Intercessor model may make an attack with 10 models, each wielding a Bolt Rifle. The Bolt Rifle has an Attacks stat of 2, and a Ballistic Skill of 3+. This means that a hit roll will consist of 
+rolling 20 dice, and succeeding on a roll of 3, 4, 5, or 6.
 
-For example, a Space Marine Intercessor model may make an attack with a Bolt Rifle. The Bolt Rifle has an Attacks stat of 2, and a Ballistic Skill of 3+. This means that a hit roll will consist of rolling 2 dice, and 
-succeeding on a roll of 3, 4, 5, or 6.
+The expected mean number of successes and the standard deviation can be calculated as:
 
-A cumulative distribution can be calculated to determine the likelihood of rolling $k$ successes for all values of $k$ from $0$ to $n$.
+$$Mean[B(20, 0.6666)] = (20)(0.6666) = 13.33$$
+
+$$SD[B(20, 0.6666] = \sqrt{(20)(0.6666)(1 - 0.6666)} = 2.11$$
+
+The cumulative distribution can be calculated to determine the likelihood of rolling $k$ successes for all values of $k$ from $0$ to $n$:
+
+| Successes | $p$ |
+|----------|----------|
+| 0 | 100.00% |
+| 1 | 100.00% |
+| 2 | 100.00% |
+| 3 | 100.00% |
+| 4 | 100.00% |
+| 5 | 100.00% |
+| 6 | 99.98% |
+| 7 | 99.91% |
+| 8 | 99.63% |
+| 9 | 98.70% |
+| 10 | 96.24% |
+| 11 | 90.81% |
+| 12 | 80.95% |
+| 13 | 66.15% |
+| 14 | 47.93% |
+| 15 | 29.72% |
+| 16 | 15.15% |
+| 17 | 6.04% |
+| 18 | 1.76% |
+| 19 | 0.33% |
+| 20 | 0.03% |
+
+
+
