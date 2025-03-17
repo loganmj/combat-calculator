@@ -8,6 +8,11 @@
         #region Properties
 
         /// <summary>
+        /// The number of models in the attacker's unit.
+        /// </summary>
+        public int NumberOfModels { get; set; }
+
+        /// <summary>
         /// The number of attacks the attacker is making.
         /// </summary>
         public int NumberOfAttacks { get; set; }

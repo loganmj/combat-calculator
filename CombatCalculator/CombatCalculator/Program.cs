@@ -15,21 +15,24 @@ namespace CombatCalculator
         /// Retrieves the number of dice to roll from the user.
         /// </summary>
         /// <returns>The number of dice to roll.</returns>
-        private static int GetNumberOfDiceFromUser()
+        private static int GetIntegerFromUser()
         {
-            return !int.TryParse(Console.ReadLine(), out int numberOfDice) ? 0 : numberOfDice;
+            if (!int.TryParse(Console.ReadLine(), out int userInt) || userInt < 1)
+            {
+                Console.WriteLine($"Invalid value, defaulting to 1.");
+                userInt = 1;
+            }
+
+            return userInt;
         }
 
         /// <summary>
         /// Retrieves the success threshold value from the user.
         /// </summary>
         /// <returns>The success threshold.</returns>
-        private static int GetSuccessThresholdFromUser()
+        private static int GetDieSuccessThresholdFromUser()
         {
-            // return !int.TryParse(Console.ReadLine(), out int successThreshold) ? 1 : successThreshold;
-            var successThreshold = 0;
-
-            if (!int.TryParse(Console.ReadLine(), out successThreshold) || successThreshold < 1 || successThreshold > 6)
+            if (!int.TryParse(Console.ReadLine(), out int successThreshold) || successThreshold < 1 || successThreshold > 6)
             {
                 Console.WriteLine($"Invalid success value, defaulting to 3.");
                 successThreshold = 3;
@@ -82,18 +85,25 @@ namespace CombatCalculator
             while (true)
             {
                 // Get data from user
-                Console.WriteLine("Enter number of hit dice to roll:");
-                var numberOfAttacks = GetNumberOfDiceFromUser();
-                Console.WriteLine($"Attacker is rolling {numberOfAttacks} hit dice.\n");
+                Console.WriteLine("Enter number of attacking models (default 1):");
+                var numberOfAttackingModels = GetIntegerFromUser();
+                Console.WriteLine($"Attacking with {numberOfAttackingModels} models.\n");
 
-                Console.WriteLine("Enter a success threshold from 1 to 6:");
-                var attackerHitSkill = GetSuccessThresholdFromUser();
+                Console.WriteLine("Enter attacker's weapon Attacks stat:");
+                var weaponAttacksStat = GetIntegerFromUser();
+                Console.WriteLine($"Attacks stat: {weaponAttacksStat}.");
+
+                var totalNumberOfAttacks = numberOfAttackingModels * weaponAttacksStat;
+                Console.WriteLine($"Attacker is rolling {totalNumberOfAttacks} hit dice.\n");
+
+                Console.WriteLine("Enter attacker's Weapon/Ballistic Skill (1-6):");
+                var attackerHitSkill = GetDieSuccessThresholdFromUser();
                 Console.WriteLine($"Attacker hits on {attackerHitSkill}s.\n");
                 
                 // Create attacker object
                 var attacker = new AttackerDTO
                 {
-                    NumberOfAttacks = numberOfAttacks,
+                    NumberOfAttacks = totalNumberOfAttacks,
                     HitSkill = attackerHitSkill
                 };
 
