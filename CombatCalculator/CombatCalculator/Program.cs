@@ -117,11 +117,11 @@ namespace CombatCalculator
 
         #endregion
 
-            #region Public Methods
+        #region Public Methods
 
-            /// <summary>
-            /// Main method performs combat calculation and outputs percent liklihood of success.
-            /// </summary>
+        /// <summary>
+        /// Main method performs combat calculation and outputs percent liklihood of success.
+        /// </summary>
         public static void Main()
         {
             while (true)
@@ -164,7 +164,7 @@ namespace CombatCalculator
                 };
 
                 // Create defender object
-                var defender = new DefenderDTO 
+                var defender = new DefenderDTO
                 {
                     Toughness = defenderToughness,
                     ArmorSave = defenderArmorSave

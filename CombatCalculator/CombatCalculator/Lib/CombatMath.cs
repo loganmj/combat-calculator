@@ -90,7 +90,7 @@ namespace CombatCalculator.Lib
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
-        public static double GetWoundProbability(AttackerDTO attacker, DefenderDTO defender) 
+        public static double GetWoundProbability(AttackerDTO attacker, DefenderDTO defender)
         {
             return GetHitProbability(attacker) * Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(GetWoundSuccessThreshold(attacker, defender)));
         }

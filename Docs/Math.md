@@ -32,6 +32,14 @@ $$p(\text{4, 5, or 6}) = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = \frac{3}{6} =
 
 Or 50%. This makes sense, as half of the results on the dice are considered a successful roll.
 
+Given a max number of possible results, and a success threshold value, the probability of getting a result within the success threshold can be calculated as:
+
+$$p(X \geq k) = \frac{(n - (k - 1))}{n}$$
+
+where 
+- $n$ is the total number of possible results.
+- $k$ is the success threshold value.
+
 ## Probability of Failure in a Single Trial
 Probability of failure is defined as the probability that success will *not* occur, and is denoted by $q$.
 
@@ -48,6 +56,14 @@ If the success case includes multiple values, such as rolling a 3+, then the pro
 $$q = 1-p = \left(1- \left(\frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6}\right)\right) = \left(1- \left(\frac{4}{6}\right)\right) = \frac{2}{6} = 0.3333$$
 
 or 33.33%
+
+Given a max number of possible results, and a success threshold value, the probability of getting a result below the success threshold can be calculated as:
+
+$$q(X \geq k) = 1 - p(X \geq k) = \left(1 - \left(\frac{(n - (k - 1))}{n}\right)\right)$$
+
+where 
+- $n$ is the total number of possible results.
+- $k$ is the success threshold value.
 
 ## Probability of Success for Common Cases
 In Warhammer 40k, success cases are commonly set as 2+, 3+, 4+, 5+, or 6+ (Rolling a 1 is almost always considered a failure). Each of these success cases on a single die have the following probabilities:
@@ -409,3 +425,11 @@ The updated cumulative probability distribution would be then calculated by plug
 | 18 | 0.00% |
 | 19 | 0.00% |
 | 20 | 0.00% |
+
+## Factoring in Armor Pierce
+In Warhammer 40k, weapons have an Armor Pierce stat. The Armor Pierce stat of a weapon is applied as a direct debuff to the defender's save stat. For example, if the defender has an armor save of 3+ and the attacker's weapon 
+has an Armor Pierce of -1, then the defender's save is treated as a 4+ instead.
+
+The probability of a successful save roll, then must factor in the attacker's Armor Pierce stat as follows:
+
+$$p(save) = $$
