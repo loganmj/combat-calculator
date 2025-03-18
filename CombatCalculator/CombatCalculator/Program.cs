@@ -17,7 +17,9 @@ namespace CombatCalculator
         /// <returns>The number of dice to roll.</returns>
         private static int GetPositiveIntegerFromUser()
         {
-            if (!int.TryParse(Console.ReadLine(), out int userInt) || userInt < 0)
+            Console.WriteLine("Enter a positive integer value ...");
+
+            if (!int.TryParse(Console.ReadLine(), out int userInt) || userInt <= 0)
             {
                 Console.WriteLine($"Invalid value, defaulting to 1.");
                 userInt = 1;
@@ -32,10 +34,12 @@ namespace CombatCalculator
         /// <returns>The success threshold.</returns>
         private static int GetDieSuccessThresholdFromUser()
         {
-            if (!int.TryParse(Console.ReadLine(), out int successThreshold) || successThreshold < 1 || successThreshold > 6)
+            Console.WriteLine($"Enter an integer value from 1 to 7 ...");
+
+            if (!int.TryParse(Console.ReadLine(), out int successThreshold) || successThreshold < 1 || successThreshold > 7)
             {
-                Console.WriteLine($"Invalid success value, defaulting to 3.");
-                successThreshold = 3;
+                Console.WriteLine($"Invalid value, defaulting to 7.");
+                successThreshold = 7;
             }
 
             return successThreshold;
@@ -48,7 +52,7 @@ namespace CombatCalculator
         /// <param name="hitStat"></param>
         private static void CalculateHitRoll(AttackerDTO attacker)
         {
-            Console.WriteLine($"Attacker is rolling {CombatMath.GetNumberOfAttacks(attacker)} hits, succeeding on a roll of {attacker.HitSkill}+ ...");
+            Console.WriteLine($"Attacker is rolling {CombatMath.GetNumberOfAttacks(attacker)} hits, succeeding on a roll of {attacker.WeaponSkill}+ ...");
 
             // Get the probability of success with any one hit roll.
             Console.WriteLine($"Probability of any one hit succeeding: {CombatMath.GetHitProbability(attacker) * 100:F2}%");
@@ -71,7 +75,7 @@ namespace CombatCalculator
         /// <param name="attacker"></param>
         private static void CalculateWoundRoll(AttackerDTO attacker, DefenderDTO defender)
         {
-            Console.WriteLine($"Projecting wound roll for an attack with {attacker.WeaponAttacks} hits, a hit skill of {attacker.HitSkill}+, "
+            Console.WriteLine($"Projecting wound roll for an attack with {attacker.WeaponAttacks} hits, a hit skill of {attacker.WeaponSkill}+, "
                               + $"and a successful wound roll being {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+");
 
             // Get the probability of success with any one wound roll.
@@ -96,7 +100,7 @@ namespace CombatCalculator
         /// <param name="defender"></param>
         private static void CalculateArmorSaveRoll(AttackerDTO attacker, DefenderDTO defender)
         {
-            Console.WriteLine($"Projecting failed save rolls for an attack with {attacker.WeaponAttacks} hits, a hit skill of {attacker.HitSkill}+, "
+            Console.WriteLine($"Projecting failed save rolls for an attack with {attacker.WeaponAttacks} hits, a hit skill of {attacker.WeaponSkill}+, "
                               + $"a successful wound roll being {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+, "
                               + $"a successful armor save roll being {CombatMath.GetAdjustedArmorSave(attacker, defender)}+ (adjusted for armor pierce),");
 
@@ -126,59 +130,69 @@ namespace CombatCalculator
         {
             while (true)
             {
-                // Get data from user
-                Console.WriteLine("Enter number of attacking models (default 1):");
-                var numberOfAttackingModels = GetPositiveIntegerFromUser();
-                Console.WriteLine($"Attacking with {numberOfAttackingModels} models.\n");
+                // Get attacker data
+                Console.WriteLine("Enter number of attacking models:");
+                var attackerNumberOfModels = GetPositiveIntegerFromUser();
 
                 Console.WriteLine("Enter attacker's weapon Attacks stat:");
                 var weaponAttacksStat = GetPositiveIntegerFromUser();
-                Console.WriteLine($"Attacks stat: {weaponAttacksStat}.");
 
-                var totalNumberOfAttacks = numberOfAttackingModels * weaponAttacksStat;
-                Console.WriteLine($"Attacker is rolling {totalNumberOfAttacks} hit dice.\n");
-
-                Console.WriteLine("Enter attacker's Weapon/Ballistic Skill stat (1-6):");
-                var attackerHitSkill = GetDieSuccessThresholdFromUser();
-                Console.WriteLine($"Attacker hits on {attackerHitSkill}s.\n");
+                Console.WriteLine("Enter attacker's Weapon Skill stat:");
+                var attackerWeaponSkill = GetDieSuccessThresholdFromUser();
 
                 Console.WriteLine("Enter attacker's weapon Strength stat:");
                 var attackerWeaponStrength = GetPositiveIntegerFromUser();
-                Console.WriteLine($"Attacker's weapon Strength is {attackerWeaponStrength}.\n");
 
                 Console.WriteLine("Enter attacker's weapon Armor Pierce stat:");
                 var attackerWeaponArmorPierce = GetPositiveIntegerFromUser();
-                Console.WriteLine($"Attacker's weapon Armor Pierce is -{attackerWeaponArmorPierce}.\n");
+
+                Console.WriteLine("Enter attacker's weapon Damate stat:");
+                var attackerWeaponDamage = GetPositiveIntegerFromUser();
+
+                // Get defender data
+                Console.WriteLine("Enter number of defending models:");
+                var defenderNumberOfModels = GetPositiveIntegerFromUser();
 
                 Console.WriteLine("Enter defender's Toughness stat:");
                 var defenderToughness = GetPositiveIntegerFromUser();
-                Console.WriteLine($"Defender's toughness is {defenderToughness}.\n");
 
-                Console.WriteLine("Enter defender's Armor Save stat (1-6):");
+                Console.WriteLine("Enter defender's Armor Save stat:");
                 var defenderArmorSave = GetDieSuccessThresholdFromUser();
-                Console.WriteLine($"Defender's armor save is {defenderArmorSave}+.\n");
 
-                Console.WriteLine("Enter defender's Invulnerable Save stat (1-6, enter 7 if defender does not have an Invulnerable Save):");
-                var defenderInvulnerableSave = GetPositiveIntegerFromUser();
-                Console.WriteLine($"Defender's invulnerable save is {defenderInvulnerableSave}+.\n");
+                Console.WriteLine("Enter defender's Invulnerable Save stat:");
+                var defenderInvulnerableSave = GetDieSuccessThresholdFromUser();
+
+                Console.WriteLine("Enter defender's Feel No Pain stat:");
+                var defenderFeelNoPain = GetDieSuccessThresholdFromUser();
+
+                Console.WriteLine("Enter defender's Wounds stat:");
+                var defenderWounds = GetPositiveIntegerFromUser();
 
                 // Create attacker object
                 var attacker = new AttackerDTO
                 {
-                    NumberOfModels = numberOfAttackingModels,
+                    NumberOfModels = attackerNumberOfModels,
                     WeaponAttacks = weaponAttacksStat,
-                    HitSkill = attackerHitSkill,
+                    WeaponSkill = attackerWeaponSkill,
                     WeaponStrength = attackerWeaponStrength,
-                    WeaponArmorPierce = attackerWeaponArmorPierce
+                    WeaponArmorPierce = attackerWeaponArmorPierce,
+                    WeaponDamage = attackerWeaponDamage,
                 };
 
                 // Create defender object
                 var defender = new DefenderDTO
                 {
+                    NumberOfModels = defenderNumberOfModels,
                     Toughness = defenderToughness,
                     ArmorSave = defenderArmorSave,
-                    InvulnerableSave = defenderInvulnerableSave
+                    InvulnerableSave = defenderInvulnerableSave,
+                    FeelNoPain = defenderFeelNoPain,
+                    Wounds = defenderWounds
                 };
+
+                // Print attacker and defender data
+                Console.WriteLine($"\n{attacker}\n");
+                Console.WriteLine($"\n{defender}\n");
 
                 // Perform hit roll
                 CalculateHitRoll(attacker);

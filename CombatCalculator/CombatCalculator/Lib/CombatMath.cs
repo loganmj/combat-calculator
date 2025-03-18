@@ -39,7 +39,7 @@ namespace CombatCalculator.Lib
         /// <returns>A double value containing the probability of success for a single trial.</returns>
         public static double GetHitProbability(AttackerDTO attacker)
         {
-            return Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(attacker.HitSkill));
+            return Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(attacker.WeaponSkill));
         }
 
         /// <summary>

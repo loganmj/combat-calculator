@@ -20,7 +20,7 @@
         /// <summary>
         /// The ballistic/weapon skill threshold value of the attacker.
         /// </summary>
-        public int HitSkill { get; set; }
+        public int WeaponSkill { get; set; }
 
         /// <summary>
         /// The strength of the attacker's weapon.
@@ -36,6 +36,22 @@
         /// The damage value of the attacker's weapon.
         /// </summary>
         public int WeaponDamage { get; set; }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return $"Attacker:\n"
+                   + $"NumberOfModels: {NumberOfModels}\n"
+                   + $"WeaponAttacks: {WeaponAttacks}\n"
+                   + $"WeaponSkill: {WeaponSkill}+\n"
+                   + $"WeaponStrength: {WeaponStrength}\n"
+                   + $"WeaponArmorPierce: -{WeaponArmorPierce}\n"
+                   + $"WeaponDamage: {WeaponDamage}";
+        }
 
         #endregion
     }

@@ -38,5 +38,21 @@
         public int NumberOfModels { get; set; }
 
         #endregion
+
+        #region Public Methods
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return $"Defender:\n"
+                   + $"NumberOfModels: {NumberOfModels}\n"
+                   + $"Toughness: {Toughness}\n"
+                   + $"ArmorSave: {ArmorSave}+\n"
+                   + $"InvulnerableSave: {InvulnerableSave}+\n"
+                   + $"FeelNoPain: {FeelNoPain}+\n"
+                   + $"Wounds: {Wounds}";
+        }
+
+        #endregion
     }
 }
