@@ -7,6 +7,15 @@ namespace CombatCalculator.Lib
     /// </summary>
     public static class CombatMath
     {
+        #region Constants
+
+        /// <summary>
+        /// The number of possible results of rolling a six-sided die.
+        /// </summary>
+        private const int POSSIBLE_RESULTS_SIX_SIDED_DIE = 6;
+        
+        #endregion
+
         #region Private Methods
 
         /// <summary>
@@ -28,7 +37,7 @@ namespace CombatCalculator.Lib
         /// </summary>
         /// <param name="attacker"></param>
         /// <returns></returns>
-        public static int GetNumberOfAttacks(AttackerDTO attacker)
+        public static int GetTotalNumberOfAttacks(AttackerDTO attacker)
         {
             return attacker.NumberOfModels * attacker.WeaponAttacks;
         }
@@ -37,9 +46,9 @@ namespace CombatCalculator.Lib
         /// Returns the probability of succeeding a roll with a single dice, given the desired success threshold.
         /// </summary>
         /// <returns>A double value containing the probability of success for a single trial.</returns>
-        public static double GetHitProbability(AttackerDTO attacker)
+        public static double GetProbabilityOfHit(AttackerDTO attacker)
         {
-            return Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(attacker.WeaponSkill));
+            return Statistics.ProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, GetNumberOfSuccessfulResults(attacker.WeaponSkill));
         }
 
         /// <summary>
@@ -48,7 +57,7 @@ namespace CombatCalculator.Lib
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
-        public static int GetWoundSuccessThreshold(AttackerDTO attacker, DefenderDTO defender)
+        public static int GetSuccessThresholdOfWound(AttackerDTO attacker, DefenderDTO defender)
         {
             var strength = attacker.WeaponStrength;
             var toughness = defender.Toughness;
@@ -90,18 +99,20 @@ namespace CombatCalculator.Lib
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
-        public static double GetWoundProbability(AttackerDTO attacker, DefenderDTO defender)
+        public static double GetProbabilityOfWound(AttackerDTO attacker, DefenderDTO defender)
         {
-            return GetHitProbability(attacker) * Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(GetWoundSuccessThreshold(attacker, defender)));
+            var woundSuccessThreshold = GetSuccessThresholdOfWound(attacker, defender);
+            var numberOfSuccessfulResults = GetNumberOfSuccessfulResults(woundSuccessThreshold);
+            return GetProbabilityOfHit(attacker) * Statistics.ProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, numberOfSuccessfulResults);
         }
 
         /// <summary>
         /// Returns a binomial distribution of attack roll results based on the process data.
         /// </summary>
         /// <returns>A BinomialDistribution object containing the hit success data.</returns>
-        public static ProbabilityDistribution GetHitBinomialDistribution(AttackerDTO attacker)
+        public static ProbabilityDistribution GetBinomialDistributionOfHits(AttackerDTO attacker)
         {
-            return Statistics.BinomialDistribution(GetNumberOfAttacks(attacker), GetHitProbability(attacker));
+            return Statistics.BinomialDistribution(GetTotalNumberOfAttacks(attacker), GetProbabilityOfHit(attacker));
         }
 
         /// <summary>
@@ -109,9 +120,9 @@ namespace CombatCalculator.Lib
         /// </summary>
         /// <param name="attacker"></param>
         /// <returns></returns>
-        public static double GetMeanHitRolls(AttackerDTO attacker)
+        public static double GetMeanHits(AttackerDTO attacker)
         {
-            return Statistics.GetMean(GetNumberOfAttacks(attacker), GetHitProbability(attacker));
+            return Statistics.GetMean(GetTotalNumberOfAttacks(attacker), GetProbabilityOfHit(attacker));
         }
 
         /// <summary>
@@ -119,18 +130,18 @@ namespace CombatCalculator.Lib
         /// </summary>
         /// <param name="attacker"></param>
         /// <returns></returns>
-        public static double GetStandardDeviationHitRolls(AttackerDTO attacker)
+        public static double GetStandardDeviationHits(AttackerDTO attacker)
         {
-            return Statistics.GetStandardDeviation(GetNumberOfAttacks(attacker), GetHitProbability(attacker));
+            return Statistics.GetStandardDeviation(GetTotalNumberOfAttacks(attacker), GetProbabilityOfHit(attacker));
         }
 
         /// <summary>
         /// Returns the upper cumulative distribution of the attacker's hit roll.
         /// </summary>
         /// <returns></returns>
-        public static ProbabilityDistribution GetHitUpperCumulativeDistribution(AttackerDTO attacker)
+        public static ProbabilityDistribution GetUpperCumulativeDistributionOfHits(AttackerDTO attacker)
         {
-            return Statistics.UpperCumulativeDistribution(GetNumberOfAttacks(attacker), GetHitProbability(attacker));
+            return Statistics.UpperCumulativeDistribution(GetTotalNumberOfAttacks(attacker), GetProbabilityOfHit(attacker));
         }
 
         /// <summary>
@@ -139,9 +150,9 @@ namespace CombatCalculator.Lib
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
-        public static ProbabilityDistribution GetWoundBinomialDistribution(AttackerDTO attacker, DefenderDTO defender)
+        public static ProbabilityDistribution GetBinomialDistributionOfWounds(AttackerDTO attacker, DefenderDTO defender)
         {
-            return Statistics.BinomialDistribution(GetNumberOfAttacks(attacker), GetWoundProbability(attacker, defender));
+            return Statistics.BinomialDistribution(GetTotalNumberOfAttacks(attacker), GetProbabilityOfWound(attacker, defender));
         }
 
         /// <summary>
@@ -150,9 +161,9 @@ namespace CombatCalculator.Lib
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
-        public static double GetMeanWoundRolls(AttackerDTO attacker, DefenderDTO defender)
+        public static double GetMeanWounds(AttackerDTO attacker, DefenderDTO defender)
         {
-            return Statistics.GetMean(GetNumberOfAttacks(attacker), GetWoundProbability(attacker, defender));
+            return Statistics.GetMean(GetTotalNumberOfAttacks(attacker), GetProbabilityOfWound(attacker, defender));
         }
 
         /// <summary>
@@ -161,9 +172,9 @@ namespace CombatCalculator.Lib
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
-        public static double GetStandardDeviationWoundRolls(AttackerDTO attacker, DefenderDTO defender)
+        public static double GetStandardDeviationWounds(AttackerDTO attacker, DefenderDTO defender)
         {
-            return Statistics.GetStandardDeviation(GetNumberOfAttacks(attacker), GetWoundProbability(attacker, defender));
+            return Statistics.GetStandardDeviation(GetTotalNumberOfAttacks(attacker), GetProbabilityOfWound(attacker, defender));
         }
 
         /// <summary>
@@ -172,9 +183,9 @@ namespace CombatCalculator.Lib
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
-        public static ProbabilityDistribution GetWoundUpperCumulativeDistribution(AttackerDTO attacker, DefenderDTO defender)
+        public static ProbabilityDistribution GetUpperCumulativeDistributionOfWounds(AttackerDTO attacker, DefenderDTO defender)
         {
-            return Statistics.UpperCumulativeDistribution(GetNumberOfAttacks(attacker), GetWoundProbability(attacker, defender));
+            return Statistics.UpperCumulativeDistribution(GetTotalNumberOfAttacks(attacker), GetProbabilityOfWound(attacker, defender));
         }
 
         /// <summary>
@@ -196,9 +207,12 @@ namespace CombatCalculator.Lib
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
-        public static double GetFailedSaveProbability(AttackerDTO attacker, DefenderDTO defender)
+        public static double GetProbabilityOfFailedSave(AttackerDTO attacker, DefenderDTO defender)
         {
-            return GetWoundProbability(attacker, defender) * (1 - Statistics.ProbabilityOfSuccess(6, GetNumberOfSuccessfulResults(GetAdjustedArmorSave(attacker, defender))));
+            var adjustedArmorSave = GetAdjustedArmorSave(attacker, defender);
+            var numberOfSuccessfulResults = GetNumberOfSuccessfulResults(adjustedArmorSave);
+            var probabilityOfSuccessfulSave = Statistics.ProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, numberOfSuccessfulResults);
+            return GetProbabilityOfWound(attacker, defender) * (1 - probabilityOfSuccessfulSave);
         }
 
         /// <summary>
@@ -207,9 +221,9 @@ namespace CombatCalculator.Lib
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
-        public static ProbabilityDistribution GetFailSaveBinomialDistribution(AttackerDTO attacker, DefenderDTO defender)
+        public static ProbabilityDistribution GetBinomialDistributionOfFailSaves(AttackerDTO attacker, DefenderDTO defender)
         {
-            return Statistics.BinomialDistribution(GetNumberOfAttacks(attacker), GetFailedSaveProbability(attacker, defender));
+            return Statistics.BinomialDistribution(GetTotalNumberOfAttacks(attacker), GetProbabilityOfFailedSave(attacker, defender));
         }
 
         /// <summary>
@@ -218,9 +232,9 @@ namespace CombatCalculator.Lib
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
-        public static double GetMeanFailedSaveRolls(AttackerDTO attacker, DefenderDTO defender)
+        public static double GetMeanFailedSaves(AttackerDTO attacker, DefenderDTO defender)
         {
-            return Statistics.GetMean(GetNumberOfAttacks(attacker), GetFailedSaveProbability(attacker, defender));
+            return Statistics.GetMean(GetTotalNumberOfAttacks(attacker), GetProbabilityOfFailedSave(attacker, defender));
         }
 
         /// <summary>
@@ -229,9 +243,9 @@ namespace CombatCalculator.Lib
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
-        public static double GetStandardDeviationFailedSaveRolls(AttackerDTO attacker, DefenderDTO defender)
+        public static double GetStandardDeviationFailedSaves(AttackerDTO attacker, DefenderDTO defender)
         {
-            return Statistics.GetStandardDeviation(GetNumberOfAttacks(attacker), GetFailedSaveProbability(attacker, defender));
+            return Statistics.GetStandardDeviation(GetTotalNumberOfAttacks(attacker), GetProbabilityOfFailedSave(attacker, defender));
         }
 
         /// <summary>
@@ -240,9 +254,9 @@ namespace CombatCalculator.Lib
         /// <param name="attacker"></param>
         /// <param name="defender"></param>
         /// <returns></returns>
-        public static ProbabilityDistribution GetFailedSaveUpperCumulativeDistribution(AttackerDTO attacker, DefenderDTO defender)
+        public static ProbabilityDistribution GetUpperCumulativeDistributionOfFailedSaves(AttackerDTO attacker, DefenderDTO defender)
         {
-            return Statistics.UpperCumulativeDistribution(GetNumberOfAttacks(attacker), GetFailedSaveProbability(attacker, defender));
+            return Statistics.UpperCumulativeDistribution(GetTotalNumberOfAttacks(attacker), GetProbabilityOfFailedSave(attacker, defender));
         }
 
         #endregion

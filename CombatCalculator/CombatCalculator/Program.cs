@@ -55,22 +55,22 @@ namespace CombatCalculator
         private static void CalculateHitRoll(AttackerDTO attacker)
         {
             Console.WriteLine($"Calculating Hit rolls for an attack with:\n"
-                              + $" - {CombatMath.GetNumberOfAttacks(attacker)} Hits,\n"
+                              + $" - {CombatMath.GetTotalNumberOfAttacks(attacker)} Hits,\n"
                               + $" - a successful Hit roll of {attacker.WeaponSkill}+");
             Console.WriteLine("");
 
             // Print stats
-            Console.WriteLine($"Probability of any one hit roll succeeding: {CombatMath.GetHitProbability(attacker) * 100:F2}%");
-            Console.WriteLine($"Mean: {CombatMath.GetMeanHitRolls(attacker):F2}");
-            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationHitRolls(attacker):F2}");
+            Console.WriteLine($"Probability of any one hit roll succeeding: {CombatMath.GetProbabilityOfHit(attacker) * 100:F2}%");
+            Console.WriteLine($"Mean: {CombatMath.GetMeanHits(attacker):F2}");
+            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationHits(attacker):F2}");
             Console.WriteLine("");
 
             // Print distributions of Hits
             Console.WriteLine($"Binomial Distribution of Hits:");
-            Console.WriteLine(CombatMath.GetHitBinomialDistribution(attacker));
+            Console.WriteLine(CombatMath.GetBinomialDistributionOfHits(attacker));
             Console.WriteLine("");
             Console.WriteLine($"Upper Cumulative Distribution of Hits:");
-            Console.WriteLine(CombatMath.GetHitUpperCumulativeDistribution(attacker));
+            Console.WriteLine(CombatMath.GetUpperCumulativeDistributionOfHits(attacker));
         }
 
         /// <summary>
@@ -82,21 +82,21 @@ namespace CombatCalculator
             Console.WriteLine($"Calculating Wound rolls for an attack with;\n"
                               + $"- {attacker.WeaponAttacks} Hits,\n"
                               + $"- a successful Hit roll of {attacker.WeaponSkill}+,\n"
-                              + $"- a successful Wound roll of {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+");
+                              + $"- a successful Wound roll of {CombatMath.GetSuccessThresholdOfWound(attacker, defender)}+");
             Console.WriteLine("");
 
             // Print stats
-            Console.WriteLine($"Probability of any one hit and wound roll succeeding: {CombatMath.GetWoundProbability(attacker, defender) * 100:F2}%");
-            Console.WriteLine($"Mean: {CombatMath.GetMeanWoundRolls(attacker, defender):F2}");
-            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationWoundRolls(attacker, defender):F2}");
+            Console.WriteLine($"Probability of any one hit and wound roll succeeding: {CombatMath.GetProbabilityOfWound(attacker, defender) * 100:F2}%");
+            Console.WriteLine($"Mean: {CombatMath.GetMeanWounds(attacker, defender):F2}");
+            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationWounds(attacker, defender):F2}");
             Console.WriteLine("");
 
             // Print distributions of successful wounds
             Console.WriteLine($"Binomial Distribution of Wounds:");
-            Console.WriteLine(CombatMath.GetWoundUpperCumulativeDistribution(attacker, defender));
+            Console.WriteLine(CombatMath.GetUpperCumulativeDistributionOfWounds(attacker, defender));
             Console.WriteLine("");
             Console.WriteLine($"Upper Cumulative Distribution of Wounds:");
-            Console.WriteLine(CombatMath.GetWoundUpperCumulativeDistribution(attacker, defender));
+            Console.WriteLine(CombatMath.GetUpperCumulativeDistributionOfWounds(attacker, defender));
         }
 
         /// <summary>
@@ -109,22 +109,22 @@ namespace CombatCalculator
             Console.WriteLine($"Calculating failed Save rolls for an attack with:"
                               + $"- {attacker.WeaponAttacks} Hits,\n"
                               + $"- a successful Hit roll of {attacker.WeaponSkill}+,\n"
-                              + $"- a successful Wound roll of {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+,\n"
+                              + $"- a successful Wound roll of {CombatMath.GetSuccessThresholdOfWound(attacker, defender)}+,\n"
                               + $"- a successful Armor Save roll of {CombatMath.GetAdjustedArmorSave(attacker, defender)}+");
             Console.WriteLine("");
 
             // Print stats
-            Console.WriteLine($"Probability of any hit and wound succeeding, and the armor save failing: {CombatMath.GetFailedSaveProbability(attacker, defender) * 100:F2}%");
-            Console.WriteLine($"Mean: {CombatMath.GetMeanFailedSaveRolls(attacker, defender):F2}");
-            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationFailedSaveRolls(attacker, defender):F2}");
+            Console.WriteLine($"Probability of any hit and wound succeeding, and the armor save failing: {CombatMath.GetProbabilityOfFailedSave(attacker, defender) * 100:F2}%");
+            Console.WriteLine($"Mean: {CombatMath.GetMeanFailedSaves(attacker, defender):F2}");
+            Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationFailedSaves(attacker, defender):F2}");
             Console.WriteLine("");
 
             // Print distributions of failed saves
             Console.WriteLine($"Binomial Distribution of Failed Saves:");
-            Console.WriteLine(CombatMath.GetFailSaveBinomialDistribution(attacker, defender));
+            Console.WriteLine(CombatMath.GetBinomialDistributionOfFailSaves(attacker, defender));
             Console.WriteLine("");
             Console.WriteLine($"Upper Cumulative Distribution of Failed Saves:");
-            Console.WriteLine(CombatMath.GetFailedSaveUpperCumulativeDistribution(attacker, defender));
+            Console.WriteLine(CombatMath.GetUpperCumulativeDistributionOfFailedSaves(attacker, defender));
         }
 
         #endregion
