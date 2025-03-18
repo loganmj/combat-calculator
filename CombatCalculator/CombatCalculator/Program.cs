@@ -25,6 +25,7 @@ namespace CombatCalculator
                 userInt = 1;
             }
 
+            Console.WriteLine("");
             return userInt;
         }
 
@@ -42,6 +43,7 @@ namespace CombatCalculator
                 successThreshold = 7;
             }
 
+            Console.WriteLine("");
             return successThreshold;
         }
 
@@ -52,21 +54,23 @@ namespace CombatCalculator
         /// <param name="hitStat"></param>
         private static void CalculateHitRoll(AttackerDTO attacker)
         {
-            Console.WriteLine($"Attacker is rolling {CombatMath.GetNumberOfAttacks(attacker)} hits, succeeding on a roll of {attacker.WeaponSkill}+ ...");
-
-            // Get the probability of success with any one hit roll.
-            Console.WriteLine($"Probability of any one hit succeeding: {CombatMath.GetHitProbability(attacker) * 100:F2}%");
+            Console.WriteLine($"Calculating Hit rolls for an attack with:\n"
+                              + $" - {CombatMath.GetNumberOfAttacks(attacker)} Hits,\n"
+                              + $" - a successful Hit roll of {attacker.WeaponSkill}+");
             Console.WriteLine("");
 
-            // Determine the upper cumulative distribution of successful hits
-            Console.WriteLine($"Upper cumulative distribution of hits:");
-            var hitRollsUpperCumulativeDistribution = CombatMath.GetHitUpperCumulativeDistribution(attacker);
-
-            // Print the distribution and stats
-            Console.WriteLine(hitRollsUpperCumulativeDistribution);
+            // Print stats
+            Console.WriteLine($"Probability of any one hit roll succeeding: {CombatMath.GetHitProbability(attacker) * 100:F2}%");
             Console.WriteLine($"Mean: {CombatMath.GetMeanHitRolls(attacker):F2}");
             Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationHitRolls(attacker):F2}");
             Console.WriteLine("");
+
+            // Print distributions of Hits
+            Console.WriteLine($"Binomial Distribution of Hits:");
+            Console.WriteLine(CombatMath.GetHitBinomialDistribution(attacker));
+            Console.WriteLine("");
+            Console.WriteLine($"Upper Cumulative Distribution of Hits:");
+            Console.WriteLine(CombatMath.GetHitUpperCumulativeDistribution(attacker));
         }
 
         /// <summary>
@@ -75,22 +79,24 @@ namespace CombatCalculator
         /// <param name="attacker"></param>
         private static void CalculateWoundRoll(AttackerDTO attacker, DefenderDTO defender)
         {
-            Console.WriteLine($"Projecting wound roll for an attack with {attacker.WeaponAttacks} hits, a hit skill of {attacker.WeaponSkill}+, "
-                              + $"and a successful wound roll being {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+");
-
-            // Get the probability of success with any one wound roll.
-            Console.WriteLine($"Probability of any one wound succeeding: {CombatMath.GetWoundProbability(attacker, defender) * 100:F2}%");
+            Console.WriteLine($"Calculating Wound rolls for an attack with;\n"
+                              + $"- {attacker.WeaponAttacks} Hits,\n"
+                              + $"- a successful Hit roll of {attacker.WeaponSkill}+,\n"
+                              + $"- a successful Wound roll of {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+");
             Console.WriteLine("");
 
-            // Determine the upper cumulative distribution of successful wounds
-            Console.WriteLine($"Upper cumulative distribution of wounds:");
-            var woundRollsUpperCumulativeDistribution = CombatMath.GetWoundUpperCumulativeDistribution(attacker, defender);
-
-            // Print the distribution and stats
-            Console.WriteLine(woundRollsUpperCumulativeDistribution);
+            // Print stats
+            Console.WriteLine($"Probability of any one hit and wound roll succeeding: {CombatMath.GetWoundProbability(attacker, defender) * 100:F2}%");
             Console.WriteLine($"Mean: {CombatMath.GetMeanWoundRolls(attacker, defender):F2}");
             Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationWoundRolls(attacker, defender):F2}");
             Console.WriteLine("");
+
+            // Print distributions of successful wounds
+            Console.WriteLine($"Binomial Distribution of Wounds:");
+            Console.WriteLine(CombatMath.GetWoundUpperCumulativeDistribution(attacker, defender));
+            Console.WriteLine("");
+            Console.WriteLine($"Upper Cumulative Distribution of Wounds:");
+            Console.WriteLine(CombatMath.GetWoundUpperCumulativeDistribution(attacker, defender));
         }
 
         /// <summary>
@@ -100,23 +106,25 @@ namespace CombatCalculator
         /// <param name="defender"></param>
         private static void CalculateArmorSaveRoll(AttackerDTO attacker, DefenderDTO defender)
         {
-            Console.WriteLine($"Projecting failed save rolls for an attack with {attacker.WeaponAttacks} hits, a hit skill of {attacker.WeaponSkill}+, "
-                              + $"a successful wound roll being {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+, "
-                              + $"a successful armor save roll being {CombatMath.GetAdjustedArmorSave(attacker, defender)}+ (adjusted for armor pierce),");
-
-            // Get the probability of failure with any one armor save roll.
-            Console.WriteLine($"Probability of any one armor save failing: {CombatMath.GetFailedSaveProbability(attacker, defender) * 100:F2}%");
+            Console.WriteLine($"Calculating failed Save rolls for an attack with:"
+                              + $"- {attacker.WeaponAttacks} Hits,\n"
+                              + $"- a successful Hit roll of {attacker.WeaponSkill}+,\n"
+                              + $"- a successful Wound roll of {CombatMath.GetWoundSuccessThreshold(attacker, defender)}+,\n"
+                              + $"- a successful Armor Save roll of {CombatMath.GetAdjustedArmorSave(attacker, defender)}+");
             Console.WriteLine("");
 
-            // Determine the upper cumulative distribution of successful wounds
-            Console.WriteLine($"Upper cumulative distribution of failed saves:");
-            var failedSaveRollsUpperCumulativeDistribution = CombatMath.GetFailedSaveUpperCumulativeDistribution(attacker, defender);
-
-            // Print the distribution and stats
-            Console.WriteLine(failedSaveRollsUpperCumulativeDistribution);
+            // Print stats
+            Console.WriteLine($"Probability of any hit and wound succeeding, and the armor save failing: {CombatMath.GetFailedSaveProbability(attacker, defender) * 100:F2}%");
             Console.WriteLine($"Mean: {CombatMath.GetMeanFailedSaveRolls(attacker, defender):F2}");
             Console.WriteLine($"Standard deviation: {CombatMath.GetStandardDeviationFailedSaveRolls(attacker, defender):F2}");
             Console.WriteLine("");
+
+            // Print distributions of failed saves
+            Console.WriteLine($"Binomial Distribution of Failed Saves:");
+            Console.WriteLine(CombatMath.GetFailSaveBinomialDistribution(attacker, defender));
+            Console.WriteLine("");
+            Console.WriteLine($"Upper Cumulative Distribution of Failed Saves:");
+            Console.WriteLine(CombatMath.GetFailedSaveUpperCumulativeDistribution(attacker, defender));
         }
 
         #endregion
@@ -130,7 +138,13 @@ namespace CombatCalculator
         {
             while (true)
             {
+                Console.WriteLine("---------- ++ Combat Calculator ++ ----------");
+                Console.WriteLine("");
+
                 // Get attacker data
+                Console.WriteLine("Attacker Data: ");
+                Console.WriteLine("");
+
                 Console.WriteLine("Enter number of attacking models:");
                 var attackerNumberOfModels = GetPositiveIntegerFromUser();
 
@@ -146,10 +160,16 @@ namespace CombatCalculator
                 Console.WriteLine("Enter attacker's weapon Armor Pierce stat:");
                 var attackerWeaponArmorPierce = GetPositiveIntegerFromUser();
 
-                Console.WriteLine("Enter attacker's weapon Damate stat:");
+                Console.WriteLine("Enter attacker's weapon Damage stat:");
                 var attackerWeaponDamage = GetPositiveIntegerFromUser();
+                
+                Console.WriteLine("");
+                Console.WriteLine("");
 
                 // Get defender data
+                Console.WriteLine("Defender Data: ");
+                Console.WriteLine("");
+
                 Console.WriteLine("Enter number of defending models:");
                 var defenderNumberOfModels = GetPositiveIntegerFromUser();
 
@@ -191,8 +211,9 @@ namespace CombatCalculator
                 };
 
                 // Print attacker and defender data
-                Console.WriteLine($"\n{attacker}\n");
-                Console.WriteLine($"\n{defender}\n");
+                Console.WriteLine("");
+                Console.WriteLine($"{attacker}\n");
+                Console.WriteLine($"{defender}\n");
 
                 // Perform hit roll
                 CalculateHitRoll(attacker);
@@ -202,6 +223,10 @@ namespace CombatCalculator
 
                 // Perform save roll
                 CalculateArmorSaveRoll(attacker, defender);
+
+                Console.WriteLine("");
+                Console.WriteLine("--------------------------------------------------");
+                Console.WriteLine("");
             }
         }
 
