@@ -93,7 +93,7 @@ namespace CombatCalculator
 
             // Print distributions of successful wounds
             Console.WriteLine($"Binomial Distribution of Wounds:");
-            Console.WriteLine(CombatMath.GetUpperCumulativeDistributionOfWounds(attacker, defender));
+            Console.WriteLine(CombatMath.GetBinomialDistributionOfWounds(attacker, defender));
             Console.WriteLine("");
             Console.WriteLine($"Upper Cumulative Distribution of Wounds:");
             Console.WriteLine(CombatMath.GetUpperCumulativeDistributionOfWounds(attacker, defender));
