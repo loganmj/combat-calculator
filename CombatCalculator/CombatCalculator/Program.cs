@@ -55,8 +55,10 @@ namespace CombatCalculator
         private static void CalculateHitRoll(AttackerDTO attacker)
         {
             Console.WriteLine($"Calculating Hit rolls for an attack with:\n"
-                              + $" - {CombatMath.GetTotalNumberOfAttacks(attacker)} Hits,\n"
-                              + $" - a successful Hit roll of {attacker.WeaponSkill}+");
+                              + $"- {attacker.NumberOfModels} models,\n"
+                              + $"- Getting {attacker.WeaponAttacks} Hits each,\n"
+                              + $"- For a total of {CombatMath.GetTotalNumberOfAttacks(attacker)} Hits,\n"
+                              + $"- With a successful Hit roll of {attacker.WeaponSkill}+");
             Console.WriteLine("");
 
             // Print stats
@@ -80,9 +82,11 @@ namespace CombatCalculator
         private static void CalculateWoundRoll(AttackerDTO attacker, DefenderDTO defender)
         {
             Console.WriteLine($"Calculating Wound rolls for an attack with;\n"
-                              + $"- {attacker.WeaponAttacks} Hits,\n"
-                              + $"- a successful Hit roll of {attacker.WeaponSkill}+,\n"
-                              + $"- a successful Wound roll of {CombatMath.GetSuccessThresholdOfWound(attacker, defender)}+");
+                              + $"- {attacker.NumberOfModels} models,\n"
+                              + $"- Getting {attacker.WeaponAttacks} Hits each,\n"
+                              + $"- For a total of {CombatMath.GetTotalNumberOfAttacks(attacker)} Hits,\n"
+                              + $"- With a successful Hit roll of {attacker.WeaponSkill}+,\n"
+                              + $"- With a successful Wound roll of {CombatMath.GetSuccessThresholdOfWound(attacker, defender)}+");
             Console.WriteLine("");
 
             // Print stats
@@ -107,10 +111,12 @@ namespace CombatCalculator
         private static void CalculateArmorSaveRoll(AttackerDTO attacker, DefenderDTO defender)
         {
             Console.WriteLine($"Calculating failed Save rolls for an attack with:\n"
-                              + $"- {attacker.WeaponAttacks} Hits,\n"
-                              + $"- a successful Hit roll of {attacker.WeaponSkill}+,\n"
-                              + $"- a successful Wound roll of {CombatMath.GetSuccessThresholdOfWound(attacker, defender)}+,\n"
-                              + $"- a successful Armor Save roll of {CombatMath.GetAdjustedArmorSave(attacker, defender)}+");
+                              + $"- {attacker.NumberOfModels} models,\n"
+                              + $"- Getting {attacker.WeaponAttacks} Hits each,\n"
+                              + $"- For a total of {CombatMath.GetTotalNumberOfAttacks(attacker)} Hits,\n"
+                              + $"- With a successful Hit roll of {attacker.WeaponSkill}+,\n"
+                              + $"- With a successful Wound roll of {CombatMath.GetSuccessThresholdOfWound(attacker, defender)}+,\n"
+                              + $"- With the defender having a successful Armor Save roll of {CombatMath.GetAdjustedArmorSave(attacker, defender)}+");
             Console.WriteLine("");
 
             // Print stats
@@ -125,6 +131,25 @@ namespace CombatCalculator
             Console.WriteLine("");
             Console.WriteLine($"Upper Cumulative Distribution of Failed Saves:");
             Console.WriteLine(CombatMath.GetUpperCumulativeDistributionOfFailedSaves(attacker, defender));
+        }
+
+        private static void CalculateDamage(AttackerDTO attacker, DefenderDTO defender) 
+        {
+            Console.WriteLine($"Calculating average amount of damage done for an attack with:\n"
+                              + $"- {attacker.NumberOfModels} models,\n"
+                              + $"- Getting {attacker.WeaponAttacks} Hits each,\n"
+                              + $"- For a total of {CombatMath.GetTotalNumberOfAttacks(attacker)} Hits,\n"
+                              + $"- With a successful Hit roll of {attacker.WeaponSkill}+,\n"
+                              + $"- With a successful Wound roll of {CombatMath.GetSuccessThresholdOfWound(attacker, defender)}+,\n"
+                              + $"- With the defender having a successful Armor Save roll of {CombatMath.GetAdjustedArmorSave(attacker, defender)}+");
+            Console.WriteLine("");
+
+            // Print stats
+            Console.WriteLine($"Expected number of successful attacks: {(int)Math.Floor(CombatMath.GetMeanFailedSaves(attacker, defender))}");
+            Console.WriteLine($"Damage per successful attack: {attacker.WeaponDamage}");
+            Console.WriteLine($"Expected total damage: {(int)Math.Floor((double)CombatMath.GetMeanDamage(attacker, defender))}");
+            Console.WriteLine($"Expected Standard deviation of total damage: {(int)Math.Floor(CombatMath.GetStandardDeviationDamage(attacker, defender))}");
+            Console.WriteLine($"Expected number of dead models: {(int)Math.Floor((double)CombatMath.GetMeanDamage(attacker, defender) / Math.Max(defender.Wounds, attacker.WeaponDamage))}");
         }
 
         #endregion
@@ -223,6 +248,9 @@ namespace CombatCalculator
 
                 // Perform save roll
                 CalculateArmorSaveRoll(attacker, defender);
+
+                // Calculate damage
+                CalculateDamage(attacker, defender);
 
                 Console.WriteLine("");
                 Console.WriteLine("--------------------------------------------------");
