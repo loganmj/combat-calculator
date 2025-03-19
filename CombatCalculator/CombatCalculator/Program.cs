@@ -1,5 +1,5 @@
-﻿using CombatCalculator.Data;
-using CombatCalculator.Lib;
+﻿using WarhammerCombatMathLibrary;
+using WarhammerCombatMathLibrary.Data;
 
 namespace CombatCalculator
 {
@@ -106,7 +106,7 @@ namespace CombatCalculator
         /// <param name="defender"></param>
         private static void CalculateArmorSaveRoll(AttackerDTO attacker, DefenderDTO defender)
         {
-            Console.WriteLine($"Calculating failed Save rolls for an attack with:"
+            Console.WriteLine($"Calculating failed Save rolls for an attack with:\n"
                               + $"- {attacker.WeaponAttacks} Hits,\n"
                               + $"- a successful Hit roll of {attacker.WeaponSkill}+,\n"
                               + $"- a successful Wound roll of {CombatMath.GetSuccessThresholdOfWound(attacker, defender)}+,\n"
